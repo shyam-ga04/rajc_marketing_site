@@ -3,10 +3,10 @@ import Header from './lib/components/Header'
 
 function App() {
   return (
-    <>
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       <Outlet />
-    </>
+    </div>
   )
 }
 
