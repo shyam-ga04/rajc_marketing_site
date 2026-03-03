@@ -69,8 +69,17 @@ function AdminLogin() {
   return (
     <main className="bg-background px-4 py-10 md:px-8">
       <section className="mx-auto w-full max-w-md">
-        <Card>
-          <CardContent className="space-y-6">
+        <Card className="relative overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-10"
+            style={{ backgroundImage: "url('/brandLogo.png')" }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 bg-background/90"
+            aria-hidden="true"
+          />
+          <CardContent className="relative z-10 space-y-6">
             <div className="space-y-1">
               <h1 className="text-2xl font-semibold tracking-tight">
                 {text.title}

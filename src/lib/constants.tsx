@@ -63,6 +63,34 @@ export interface AdminLoginText {
   passwordMinLengthError: string
 }
 
+export interface ContactFormText {
+  nameLabel: string
+  namePlaceholder: string
+  phoneLabel: string
+  phonePlaceholder: string
+  emailLabel: string
+  emailPlaceholder: string
+  locationLabel: string
+  locationPlaceholder: string
+  budgetRangeLabel: string
+  budgetRangePlaceholder: string
+  budgetRangeOptions: string[]
+  messageLabel: string
+  messagePlaceholder: string
+  submitButton: string
+  successMessage: string
+  nameRequiredError: string
+  nameInvalidError: string
+  phoneRequiredError: string
+  phoneInvalidError: string
+  emailRequiredError: string
+  emailInvalidError: string
+  locationRequiredError: string
+  budgetRangeRequiredError: string
+  messageRequiredError: string
+  messageInvalidError: string
+}
+
 export type WhyChooseUsIconKey =
   | "experience"
   | "qualityMaterials"
@@ -219,6 +247,40 @@ export const DEFAULT_ADMIN_LOGIN_TEXT: AdminLoginText = {
   passwordMinLengthError: "Password must be at least 6 characters.",
 }
 
+export const DEFAULT_CONTACT_FORM_TEXT: ContactFormText = {
+  nameLabel: "Name",
+  namePlaceholder: "Enter your full name",
+  phoneLabel: "Phone",
+  phonePlaceholder: "Enter your phone number",
+  emailLabel: "Email",
+  emailPlaceholder: "Enter your email",
+  locationLabel: "Location",
+  locationPlaceholder: "Enter your city/location",
+  budgetRangeLabel: "Budget range",
+  budgetRangePlaceholder: "Select budget range",
+  budgetRangeOptions: [
+    "Below 10 Lakhs",
+    "10 - 25 Lakhs",
+    "25 - 50 Lakhs",
+    "50 Lakhs - 1 Crore",
+    "Above 1 Crore",
+  ],
+  messageLabel: "Message",
+  messagePlaceholder: "Write your project requirements",
+  submitButton: "Submit",
+  successMessage: "Thanks for reaching out. We will contact you soon.",
+  nameRequiredError: "Name is required.",
+  nameInvalidError: "Name must be at least 2 characters.",
+  phoneRequiredError: "Phone is required.",
+  phoneInvalidError: "Enter a valid phone number.",
+  emailRequiredError: "Email is required.",
+  emailInvalidError: "Enter a valid email address.",
+  locationRequiredError: "Location is required.",
+  budgetRangeRequiredError: "Budget range is required.",
+  messageRequiredError: "Message is required.",
+  messageInvalidError: "Message must be at least 10 characters.",
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -250,6 +312,7 @@ export const SCREEN_TEXT = {
     title: "Contact Us",
     description:
       "Reach out to discuss your project requirements, timeline, and budget. We respond quickly with practical next steps.",
+    form: DEFAULT_CONTACT_FORM_TEXT,
   },
   footer: DEFAULT_FOOTER_DATA,
   adminLogin: DEFAULT_ADMIN_LOGIN_TEXT,
