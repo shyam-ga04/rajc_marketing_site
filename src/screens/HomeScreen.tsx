@@ -1,6 +1,7 @@
 import { useNavigate } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { SCREEN_TEXT } from "@/lib/constants"
 
 function HomeScreen() {
   const navigate = useNavigate()
@@ -21,15 +22,14 @@ function HomeScreen() {
           <CardContent className="relative z-10 flex min-h-[520px] items-center">
             <div className="max-w-3xl space-y-6">
               <p className="w-fit rounded-full border border-border/80 bg-muted/70 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Raj Constructions
+                {SCREEN_TEXT.home.badge}
               </p>
               <blockquote className="space-y-4">
                 <p className="text-3xl font-semibold leading-tight md:text-5xl">
-                  "We build spaces that hold people, purpose, and possibility."
+                  {SCREEN_TEXT.home.quote}
                 </p>
                 <p className="max-w-2xl text-base text-muted-foreground md:text-lg">
-                  From concept to completion, our team delivers durable,
-                  human-first projects designed to last.
+                  {SCREEN_TEXT.home.description}
                 </p>
               </blockquote>
               <div className="flex flex-wrap gap-3">
@@ -39,7 +39,7 @@ function HomeScreen() {
                   className="border-border bg-background text-foreground hover:bg-accent"
                   onClick={() => navigate({ to: "/about" })}
                 >
-                  Explore Portfolio
+                  {SCREEN_TEXT.home.ctaExplore}
                 </Button>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import { SCREEN_TEXT } from "@/lib/constants"
 
 const AboutUs: React.FC = () => {
   return (
@@ -7,11 +8,11 @@ const AboutUs: React.FC = () => {
       <section className="mx-auto w-full max-w-6xl">
         <Card>
           <CardContent className="space-y-3">
-            <h1 className="text-3xl font-semibold tracking-tight">About Us</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">
+              {SCREEN_TEXT.about.title}
+            </h1>
             <p className="text-muted-foreground">
-              We are a construction team focused on delivering durable,
-              human-centered spaces with quality and accountability at every
-              phase.
+              {SCREEN_TEXT.about.description}
             </p>
           </CardContent>
         </Card>

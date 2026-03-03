@@ -1,5 +1,6 @@
 import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import { SCREEN_TEXT } from "@/lib/constants"
 
 const ProjectDetails: React.FC = () => {
   return (
@@ -8,11 +9,10 @@ const ProjectDetails: React.FC = () => {
         <Card>
           <CardContent className="space-y-3">
             <h1 className="text-3xl font-semibold tracking-tight">
-              Project Details
+              {SCREEN_TEXT.projectDetails.title}
             </h1>
             <p className="text-muted-foreground">
-              Explore completed and ongoing projects with scope highlights,
-              timelines, and delivery outcomes.
+              {SCREEN_TEXT.projectDetails.description}
             </p>
           </CardContent>
         </Card>
