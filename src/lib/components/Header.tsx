@@ -39,7 +39,9 @@ function Header() {
               {item.label}
             </Link>
           ))}
-          <ThemeToggle />
+          <div className="ml-2">
+            <ThemeToggle />
+          </div>
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">

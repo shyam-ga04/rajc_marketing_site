@@ -5,6 +5,7 @@ import AboutUs from "./screens/AboutUs";
 import Services from "./screens/Services";
 import ProjectDetails from "./screens/ProjectDetails";
 import ContactUs from "./screens/ContactUs";
+import AdminLogin from "./screens/AdminLogin";
 
 const rootRoute = new RootRoute({
   component: App,
@@ -40,12 +41,19 @@ const contactUsRoute = new Route({
   component: ContactUs,
 });
 
+const adminRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/admin",
+  component: AdminLogin,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   servicesRoute,
   projectDetailsRoute,
   contactUsRoute,
+  adminRoute,
 ]);
 
 export const router = new Router({ routeTree });
