@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
 import { useTheme } from "@/lib/theme"
 
 function ThemeToggle() {
@@ -6,16 +6,14 @@ function ThemeToggle() {
   const isDark = theme === "dark"
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      size="sm"
-      onClick={toggleTheme}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="text-foreground hover:bg-accent"
-    >
-      {isDark ? "Light" : "Dark"}
-    </Button>
+    <label className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
+      <span>{isDark ? "Dark" : "Light"}</span>
+      <Switch
+        checked={isDark}
+        onCheckedChange={() => toggleTheme()}
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      />
+    </label>
   )
 }
 

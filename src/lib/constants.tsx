@@ -7,6 +7,19 @@ export interface QuickIntroData {
   projectTypesValue: string
 }
 
+export interface ServicePreviewItem {
+  name: string
+  description: string
+  linkLabel: string
+  href: "/services"
+}
+
+export interface ServicesPreviewData {
+  title: string
+  description: string
+  items: ServicePreviewItem[]
+}
+
 export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
   introTitle: "Quick About RAJ Constructions",
   introLines: [
@@ -21,6 +34,56 @@ export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
     "Residential homes, commercial buildings, renovation projects, and turnkey construction solutions.",
 }
 
+export const DEFAULT_SERVICES_PREVIEW_DATA: ServicesPreviewData = {
+  title: "Services Preview",
+  description:
+    "From planning to execution, we deliver complete construction services with reliability and quality.",
+  items: [
+    {
+      name: "Residential Construction",
+      description:
+        "Custom homes and housing projects built with durable materials and practical layouts.",
+      linkLabel: "View service",
+      href: "/services",
+    },
+    {
+      name: "Commercial Construction",
+      description:
+        "Office and retail spaces designed for performance, compliance, and long-term use.",
+      linkLabel: "View service",
+      href: "/services",
+    },
+    {
+      name: "Renovation & Remodeling",
+      description:
+        "Modernization and structural upgrades that improve functionality and visual quality.",
+      linkLabel: "View service",
+      href: "/services",
+    },
+    {
+      name: "Turnkey Projects",
+      description:
+        "End-to-end delivery from concept, design coordination, and approvals to handover.",
+      linkLabel: "View service",
+      href: "/services",
+    },
+    {
+      name: "Interior Fit-Outs",
+      description:
+        "Efficient interior execution for residential and commercial spaces with quality finishing.",
+      linkLabel: "View service",
+      href: "/services",
+    },
+    {
+      name: "Project Management",
+      description:
+        "Schedule, cost, and vendor coordination to keep projects on time and within budget.",
+      linkLabel: "View service",
+      href: "/services",
+    },
+  ],
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -29,6 +92,7 @@ export const SCREEN_TEXT = {
       "From concept to completion, our team delivers durable, human-first projects designed to last.",
     ctaExplore: "Explore Portfolio",
     ...DEFAULT_QUICK_INTRO_DATA,
+    servicesPreview: DEFAULT_SERVICES_PREVIEW_DATA,
   },
   about: {
     title: "About Us",
