@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from '@tanstack/react-router'
 import './index.css'
 import { router } from './routes'
+import { ThemeProvider } from './lib/theme'
 
 const rootElement = document.getElementById('root')!
 
@@ -10,7 +11,9 @@ if (!rootElement.innerHTML) {
   const root = createRoot(rootElement)
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </StrictMode>,
   )
 }
