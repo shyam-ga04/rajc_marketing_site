@@ -38,6 +38,14 @@ export interface WhyChooseUsData {
   items: WhyChooseUsItem[]
 }
 
+export interface FooterData {
+  companyName: string
+  address: string
+  phone: string
+  email: string
+  copyright: string
+}
+
 export type WhyChooseUsIconKey =
   | "experience"
   | "qualityMaterials"
@@ -169,6 +177,14 @@ export const DEFAULT_WHY_CHOOSE_US_DATA: WhyChooseUsData = {
   ],
 }
 
+export const DEFAULT_FOOTER_DATA: FooterData = {
+  companyName: "RAJ Constructions",
+  address: "123 Builder Street, Bengaluru, Karnataka 560001",
+  phone: "+91 98765 43210",
+  email: "info@rajconstructions.com",
+  copyright: "2026 RAJ Constructions. All rights reserved.",
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -201,4 +217,5 @@ export const SCREEN_TEXT = {
     description:
       "Reach out to discuss your project requirements, timeline, and budget. We respond quickly with practical next steps.",
   },
+  footer: DEFAULT_FOOTER_DATA,
 } as const

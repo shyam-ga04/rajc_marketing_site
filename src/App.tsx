@@ -1,11 +1,15 @@
 import { Outlet } from '@tanstack/react-router'
 import Header from './lib/components/Header'
+import Footer from './lib/components/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
-      <Outlet />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   )
 }
