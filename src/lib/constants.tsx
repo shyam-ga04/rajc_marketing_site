@@ -91,6 +91,46 @@ export interface ContactFormText {
   messageInvalidError: string
 }
 
+export interface AboutDetailData {
+  companyIntroduction: {
+    heading: string
+    whoWeAre: string
+    yearsInBusinessLabel: string
+    yearsInBusinessValue: string
+    projectTypesLabel: string
+    projectTypesValue: string
+  }
+  missionVision: {
+    heading: string
+    missionTitle: string
+    mission: string
+    visionTitle: string
+    vision: string
+  }
+  companyJourney: {
+    heading: string
+    startedTitle: string
+    startedDescription: string
+    milestonesTitle: string
+    milestones: string[]
+  }
+  leadership: {
+    heading: string
+    name: string
+    role: string
+    description: string
+  }
+  strengthsValues: {
+    heading: string
+    items: string[]
+  }
+  companyLocation: {
+    heading: string
+    address: string
+    mapEmbedUrl: string
+  }
+}
+
 export type WhyChooseUsIconKey =
   | "experience"
   | "qualityMaterials"
@@ -281,6 +321,59 @@ export const DEFAULT_CONTACT_FORM_TEXT: ContactFormText = {
   messageInvalidError: "Message must be at least 10 characters.",
 }
 
+export const DEFAULT_ABOUT_DETAIL_DATA: AboutDetailData = {
+  companyIntroduction: {
+    heading: "Company Introduction",
+    whoWeAre:
+      "RAJ Constructions is a full-service construction company focused on residential, commercial, and renovation projects. We combine engineering discipline, practical execution, and client-first communication to deliver spaces that are durable, functional, and built with long-term value in mind.",
+    yearsInBusinessLabel: "Years in business",
+    yearsInBusinessValue: "15+ years of execution experience",
+    projectTypesLabel: "Types of projects",
+    projectTypesValue:
+      "Residential homes, apartment blocks, commercial buildings, interior fit-outs, renovations, and turnkey developments.",
+  },
+  missionVision: {
+    heading: "Mission & Vision",
+    missionTitle: "Mission",
+    mission:
+      "To build dependable, high-quality projects through safe practices, transparent communication, and on-time delivery.",
+    visionTitle: "Vision",
+    vision:
+      "To be a trusted construction partner known for consistent quality, ethical operations, and long-lasting client relationships.",
+  },
+  companyJourney: {
+    heading: "Company Story / Journey",
+    startedTitle: "When we started",
+    startedDescription:
+      "RAJ Constructions began in 2010 as a small local contracting team and steadily grew by delivering projects with reliability and accountability.",
+    milestonesTitle: "Key milestones",
+    milestones: [
+      "2010: Company founded with a focus on residential construction.",
+      "2014: Expanded into commercial project execution and site management.",
+      "2018: Launched turnkey project delivery across planning to handover.",
+      "2022: Crossed 100+ successfully completed projects.",
+      "2025: Strengthened process quality, safety standards, and client reporting systems.",
+    ],
+  },
+  leadership: {
+    heading: "Leadership / Founder",
+    name: "Rajesh Kumar",
+    role: "Founder & Managing Director",
+    description:
+      "Rajesh leads the company with a strong focus on construction quality, disciplined planning, and transparent client collaboration. His hands-on project oversight has shaped RAJ Constructions into a dependable execution partner.",
+  },
+  strengthsValues: {
+    heading: "Strengths / Values",
+    items: ["Safety", "Quality", "Transparency", "Customer satisfaction"],
+  },
+  companyLocation: {
+    heading: "Company Location",
+    address: "123 Builder Street, Bengaluru, Karnataka 560001",
+    mapEmbedUrl:
+      "https://www.google.com/maps?q=123+Builder+Street,+Bengaluru,+Karnataka+560001&output=embed",
+  },
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -297,6 +390,7 @@ export const SCREEN_TEXT = {
     title: "About Us",
     description:
       "We are a construction team focused on delivering durable, human-centered spaces with quality and accountability at every phase.",
+    details: DEFAULT_ABOUT_DETAIL_DATA,
   },
   services: {
     title: "Services",
