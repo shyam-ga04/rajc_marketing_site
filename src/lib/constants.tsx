@@ -1,3 +1,26 @@
+export interface QuickIntroData {
+  introTitle: string
+  introLines: string[]
+  yearsExperienceLabel: string
+  yearsExperienceValue: string
+  projectTypesLabel: string
+  projectTypesValue: string
+}
+
+export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
+  introTitle: "Quick About RAJ Constructions",
+  introLines: [
+    "RAJ Constructions is a trusted construction partner delivering quality work with clear planning and disciplined execution.",
+    "We combine practical engineering with on-ground experience to create spaces that are safe, functional, and built to endure.",
+    "Our team works closely with clients from first concept to final handover, keeping timelines and quality standards in focus.",
+  ],
+  yearsExperienceLabel: "Years of experience",
+  yearsExperienceValue: "15+",
+  projectTypesLabel: "Type of projects handled",
+  projectTypesValue:
+    "Residential homes, commercial buildings, renovation projects, and turnkey construction solutions.",
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -5,6 +28,7 @@ export const SCREEN_TEXT = {
     description:
       "From concept to completion, our team delivers durable, human-first projects designed to last.",
     ctaExplore: "Explore Portfolio",
+    ...DEFAULT_QUICK_INTRO_DATA,
   },
   about: {
     title: "About Us",
