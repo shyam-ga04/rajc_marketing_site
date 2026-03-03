@@ -3,10 +3,12 @@ import HeroSection from "@/lib/sections/HeroSection"
 import QuickIntroSection from "@/lib/sections/QuickIntroSection"
 import ServicesPreviewSection from "@/lib/sections/ServicesPreviewSection"
 import FeaturedProjectsSection from "@/lib/sections/FeaturedProjectsSection"
+import WhyChooseUsSection from "@/lib/sections/WhyChooseUsSection"
 import {
   type FeaturedProjectsData,
   type QuickIntroData,
   type ServicesPreviewData,
+  type WhyChooseUsData,
 } from "@/lib/constants"
 
 function HomeScreen() {
@@ -14,6 +16,7 @@ function HomeScreen() {
   const quickIntroDataFromApi: QuickIntroData | undefined = undefined
   const servicesPreviewDataFromApi: ServicesPreviewData | undefined = undefined
   const featuredProjectsDataFromApi: FeaturedProjectsData | undefined = undefined
+  const whyChooseUsDataFromApi: WhyChooseUsData | undefined = undefined
 
   return (
     <main className="bg-background px-4 py-8 md:px-8">
@@ -21,6 +24,7 @@ function HomeScreen() {
       <QuickIntroSection data={quickIntroDataFromApi} />
       <ServicesPreviewSection data={servicesPreviewDataFromApi} />
       <FeaturedProjectsSection data={featuredProjectsDataFromApi} />
+      <WhyChooseUsSection data={whyChooseUsDataFromApi} />
     </main>
   )
 }

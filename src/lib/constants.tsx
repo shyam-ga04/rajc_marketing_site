@@ -33,6 +33,24 @@ export interface FeaturedProjectsData {
   items: FeaturedProjectItem[]
 }
 
+export interface WhyChooseUsData {
+  title: string
+  items: WhyChooseUsItem[]
+}
+
+export type WhyChooseUsIconKey =
+  | "experience"
+  | "qualityMaterials"
+  | "onTimeDelivery"
+  | "transparentPricing"
+  | "safetyFirst"
+  | "skilledTeam"
+
+export interface WhyChooseUsItem {
+  title: string
+  icon: WhyChooseUsIconKey
+}
+
 export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
   introTitle: "Quick About RAJ Constructions",
   introLines: [
@@ -139,6 +157,18 @@ export const DEFAULT_FEATURED_PROJECTS_DATA: FeaturedProjectsData = {
   ],
 }
 
+export const DEFAULT_WHY_CHOOSE_US_DATA: WhyChooseUsData = {
+  title: "Why Choose Us",
+  items: [
+    { title: "Experience", icon: "experience" },
+    { title: "Quality materials", icon: "qualityMaterials" },
+    { title: "On-time delivery", icon: "onTimeDelivery" },
+    { title: "Transparent pricing", icon: "transparentPricing" },
+    { title: "Safety-first approach", icon: "safetyFirst" },
+    { title: "Skilled workforce", icon: "skilledTeam" },
+  ],
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -149,6 +179,7 @@ export const SCREEN_TEXT = {
     ...DEFAULT_QUICK_INTRO_DATA,
     servicesPreview: DEFAULT_SERVICES_PREVIEW_DATA,
     featuredProjects: DEFAULT_FEATURED_PROJECTS_DATA,
+    whyChooseUs: DEFAULT_WHY_CHOOSE_US_DATA,
   },
   about: {
     title: "About Us",
