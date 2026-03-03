@@ -20,6 +20,19 @@ export interface ServicesPreviewData {
   items: ServicePreviewItem[]
 }
 
+export interface FeaturedProjectItem {
+  imageUrl: string
+  imageAlt: string
+  name: string
+  location: string
+  description: string
+}
+
+export interface FeaturedProjectsData {
+  title: string
+  items: FeaturedProjectItem[]
+}
+
 export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
   introTitle: "Quick About RAJ Constructions",
   introLines: [
@@ -84,6 +97,48 @@ export const DEFAULT_SERVICES_PREVIEW_DATA: ServicesPreviewData = {
   ],
 }
 
+export const DEFAULT_FEATURED_PROJECTS_DATA: FeaturedProjectsData = {
+  title: "Featured Projects",
+  items: [
+    {
+      imageUrl:
+        "https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      imageAlt: "Modern house exterior design",
+      name: "Skyline Villa",
+      location: "Bengaluru, Karnataka",
+      description:
+        "A contemporary family residence with optimized daylight, ventilation, and durable exterior finishes.",
+    },
+    {
+      imageUrl:
+        "https://images.pexels.com/photos/19365757/pexels-photo-19365757.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      imageAlt: "Colonial style home exterior",
+      name: "Heritage Court Home",
+      location: "Mysuru, Karnataka",
+      description:
+        "A heritage-inspired home combining traditional facade details with modern structural and utility upgrades.",
+    },
+    {
+      imageUrl:
+        "https://images.pexels.com/photos/23880098/pexels-photo-23880098.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      imageAlt: "Mediterranean style house exterior",
+      name: "Palm Crest Residence",
+      location: "Hyderabad, Telangana",
+      description:
+        "A premium two-story residential build focused on outdoor living, landscaping, and weather-resilient materials.",
+    },
+    {
+      imageUrl:
+        "https://images.pexels.com/photos/20336639/pexels-photo-20336639.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      imageAlt: "Rustic stone house exterior",
+      name: "Greenstone Retreat",
+      location: "Coimbatore, Tamil Nadu",
+      description:
+        "A countryside-style project with natural stone textures and low-maintenance construction planning.",
+    },
+  ],
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -93,6 +148,7 @@ export const SCREEN_TEXT = {
     ctaExplore: "Explore Portfolio",
     ...DEFAULT_QUICK_INTRO_DATA,
     servicesPreview: DEFAULT_SERVICES_PREVIEW_DATA,
+    featuredProjects: DEFAULT_FEATURED_PROJECTS_DATA,
   },
   about: {
     title: "About Us",
