@@ -46,6 +46,23 @@ export interface FooterData {
   copyright: string
 }
 
+export interface AdminLoginText {
+  title: string
+  subtitle: string
+  emailLabel: string
+  passwordLabel: string
+  emailPlaceholder: string
+  passwordPlaceholder: string
+  signInButton: string
+  signingInButton: string
+  signedInPrefix: string
+  unknownError: string
+  emailRequiredError: string
+  emailInvalidError: string
+  passwordRequiredError: string
+  passwordMinLengthError: string
+}
+
 export type WhyChooseUsIconKey =
   | "experience"
   | "qualityMaterials"
@@ -185,6 +202,23 @@ export const DEFAULT_FOOTER_DATA: FooterData = {
   copyright: "@ 2026 RAJ Constructions. All rights reserved.",
 }
 
+export const DEFAULT_ADMIN_LOGIN_TEXT: AdminLoginText = {
+  title: "Admin Login",
+  subtitle: "Sign in with your admin credentials.",
+  emailLabel: "Email",
+  passwordLabel: "Password",
+  emailPlaceholder: "admin@example.com",
+  passwordPlaceholder: "Enter password",
+  signInButton: "Sign in",
+  signingInButton: "Signing in...",
+  signedInPrefix: "Signed in as",
+  unknownError: "Something went wrong while signing in.",
+  emailRequiredError: "Email is required.",
+  emailInvalidError: "Enter a valid email address.",
+  passwordRequiredError: "Password is required.",
+  passwordMinLengthError: "Password must be at least 6 characters.",
+}
+
 export const SCREEN_TEXT = {
   home: {
     badge: "Raj Constructions",
@@ -218,4 +252,5 @@ export const SCREEN_TEXT = {
       "Reach out to discuss your project requirements, timeline, and budget. We respond quickly with practical next steps.",
   },
   footer: DEFAULT_FOOTER_DATA,
+  adminLogin: DEFAULT_ADMIN_LOGIN_TEXT,
 } as const
