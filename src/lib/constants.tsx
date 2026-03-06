@@ -20,6 +20,17 @@ export interface ServicesPreviewData {
   items: ServicePreviewItem[]
 }
 
+export interface ServiceDetailItem {
+  id: string
+  name: string
+  shortDescription: string
+  fullDescription: string
+  scope: string[]
+  process: string[]
+  deliverables: string[]
+  idealFor: string
+}
+
 export interface FeaturedProjectItem {
   imageUrl: string
   imageAlt: string
@@ -172,54 +183,181 @@ export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
     "Residential homes, commercial buildings, renovation projects, and turnkey construction solutions.",
 }
 
+export const SERVICE_DETAILS_DATA: ServiceDetailItem[] = [
+  {
+    id: "residential-construction",
+    name: "Residential Construction",
+    shortDescription:
+      "Custom homes and housing projects built with durable materials and practical layouts.",
+    fullDescription:
+      "Our residential construction service covers complete home development from concept alignment to final handover. We focus on structural safety, functional planning, and long-term usability, ensuring each home reflects client lifestyle needs while maintaining build quality standards.",
+    scope: [
+      "Site preparation, foundation, and structural execution",
+      "Brickwork, plastering, roofing, and exterior finishing",
+      "Internal layouts, room zoning, and utility planning",
+      "Electrical, plumbing, and waterproofing coordination",
+    ],
+    process: [
+      "Requirement discussion and site assessment",
+      "Design coordination and cost planning",
+      "Construction phase execution with milestone reviews",
+      "Quality checks, snag closure, and handover",
+    ],
+    deliverables: [
+      "Completed home as per approved scope",
+      "Material and workmanship quality checklist",
+      "As-built service layout and handover support",
+    ],
+    idealFor:
+      "Homeowners building independent houses, villas, or duplex residences.",
+  },
+  {
+    id: "commercial-construction",
+    name: "Commercial Construction",
+    shortDescription:
+      "Office and retail spaces designed for performance, compliance, and long-term use.",
+    fullDescription:
+      "We deliver commercial buildings that balance operational efficiency, code compliance, and construction speed. The service is structured for offices, retail units, and mixed-use spaces that need robust infrastructure and reliable timelines.",
+    scope: [
+      "Core civil and structural construction",
+      "Commercial-grade electrical and plumbing systems",
+      "Facade and entrance development",
+      "Safety, fire, and compliance-driven execution",
+    ],
+    process: [
+      "Business use-case and facility planning",
+      "BOQ alignment and schedule finalization",
+      "Execution with weekly progress tracking",
+      "Testing, compliance checks, and operational handover",
+    ],
+    deliverables: [
+      "Commercial-ready space with essential utilities",
+      "Compliance-oriented execution documentation",
+      "Handover with completion and inspection records",
+    ],
+    idealFor:
+      "Businesses setting up offices, showrooms, clinics, and retail stores.",
+  },
+  {
+    id: "renovation-remodeling",
+    name: "Renovation & Remodeling",
+    shortDescription:
+      "Modernization and structural upgrades that improve functionality and visual quality.",
+    fullDescription:
+      "Our renovation and remodeling service transforms existing properties into updated, efficient spaces without unnecessary reconstruction. We target layout optimization, service upgrades, and modern finish quality while minimizing disruption.",
+    scope: [
+      "Selective demolition and structural adjustments",
+      "Space reconfiguration and circulation improvement",
+      "Electrical/plumbing replacement and waterproofing fixes",
+      "Interior and exterior refurbishment",
+    ],
+    process: [
+      "Condition assessment and defect mapping",
+      "Upgrade planning with phased execution strategy",
+      "Renovation implementation with controlled downtime",
+      "Final finishing, testing, and closure",
+    ],
+    deliverables: [
+      "Upgraded and optimized built space",
+      "Improved service lines and reduced maintenance risks",
+      "Refreshed interiors/exteriors aligned to new use",
+    ],
+    idealFor:
+      "Owners upgrading old homes, offices, or partially damaged structures.",
+  },
+  {
+    id: "turnkey-projects",
+    name: "Turnkey Projects",
+    shortDescription:
+      "End-to-end delivery from concept, design coordination, and approvals to handover.",
+    fullDescription:
+      "Our turnkey service is a single-point delivery model where we manage every execution stage. From planning and procurement to construction and commissioning, we reduce client coordination burden and provide a predictable outcome.",
+    scope: [
+      "End-to-end project planning and execution management",
+      "Vendor, material, and timeline coordination",
+      "Civil, MEP, and finishing integration",
+      "Testing, commissioning, and handover support",
+    ],
+    process: [
+      "Project definition and budget alignment",
+      "Integrated planning and procurement strategy",
+      "Execution under centralized project management",
+      "Commissioning and complete handover",
+    ],
+    deliverables: [
+      "Fully completed project ready for occupancy/use",
+      "Single accountability from start to finish",
+      "Structured progress and completion reporting",
+    ],
+    idealFor:
+      "Clients who want complete execution with minimal day-to-day coordination.",
+  },
+  {
+    id: "interior-fit-outs",
+    name: "Interior Fit-Outs",
+    shortDescription:
+      "Efficient interior execution for residential and commercial spaces with quality finishing.",
+    fullDescription:
+      "This service focuses on practical and aesthetic interior execution including layout-ready services, ceiling works, modular installations, and final finishes. We optimize utility, appearance, and maintainability for daily use.",
+    scope: [
+      "False ceiling, partitions, and wall treatments",
+      "Flooring, painting, and interior finishing",
+      "Modular furniture and storage integration",
+      "Lighting, switchboards, and utility interface setup",
+    ],
+    process: [
+      "Space study and fit-out requirement capture",
+      "Material palette and execution planning",
+      "Fit-out works with stage-based quality checks",
+      "Snag resolution and final interior handover",
+    ],
+    deliverables: [
+      "Ready-to-use interior spaces",
+      "Functional layout and finish coordination",
+      "Quality-checked fit-out completion",
+    ],
+    idealFor:
+      "Apartment owners, office tenants, and commercial outlets needing interior execution.",
+  },
+  {
+    id: "project-management",
+    name: "Project Management",
+    shortDescription:
+      "Schedule, cost, and vendor coordination to keep projects on time and within budget.",
+    fullDescription:
+      "Our project management service ensures structured control of timeline, cost, quality, and stakeholder communication. We monitor milestones, risks, and procurement flow to keep the project aligned with agreed delivery targets.",
+    scope: [
+      "Master schedule planning and milestone control",
+      "Cost tracking and change management",
+      "Vendor, contractor, and material coordination",
+      "Quality audit and reporting governance",
+    ],
+    process: [
+      "Project baseline setup (scope, time, cost)",
+      "Execution monitoring with periodic dashboards",
+      "Risk review and corrective action planning",
+      "Final closure documentation and handover tracking",
+    ],
+    deliverables: [
+      "Transparent project progress reports",
+      "Issue/risk logs with mitigation actions",
+      "Improved control on schedule and budget outcomes",
+    ],
+    idealFor:
+      "Clients managing multi-vendor or medium-to-large construction programs.",
+  },
+]
+
 export const DEFAULT_SERVICES_PREVIEW_DATA: ServicesPreviewData = {
   title: "Services Preview",
   description:
     "From planning to execution, we deliver complete construction services with reliability and quality.",
-  items: [
-    {
-      name: "Residential Construction",
-      description:
-        "Custom homes and housing projects built with durable materials and practical layouts.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Commercial Construction",
-      description:
-        "Office and retail spaces designed for performance, compliance, and long-term use.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Renovation & Remodeling",
-      description:
-        "Modernization and structural upgrades that improve functionality and visual quality.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Turnkey Projects",
-      description:
-        "End-to-end delivery from concept, design coordination, and approvals to handover.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Interior Fit-Outs",
-      description:
-        "Efficient interior execution for residential and commercial spaces with quality finishing.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Project Management",
-      description:
-        "Schedule, cost, and vendor coordination to keep projects on time and within budget.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-  ],
+  items: SERVICE_DETAILS_DATA.map((service) => ({
+    name: service.name,
+    description: service.shortDescription,
+    linkLabel: "View service",
+    href: "/services",
+  })),
 }
 
 export const PROJECTS_DETAILS_DATA: DetailedProjectItem[] = [

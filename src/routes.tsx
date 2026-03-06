@@ -3,6 +3,7 @@ import App from "./App"
 import HomeScreen from "./screens/HomeScreen"
 import AboutUs from "./screens/AboutUs"
 import Services from "./screens/Services"
+import ServiceDetails from "./screens/ServiceDetails"
 import Projects from "./screens/Projects"
 import ProjectDetails from "./screens/ProjectDetails"
 import ContactUs from "./screens/ContactUs"
@@ -28,6 +29,12 @@ const servicesRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/services",
   component: Services,
+})
+
+const serviceDetailByIdRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/services/$serviceId",
+  component: ServiceDetails,
 })
 
 const projectDetailsRoute = new Route({
@@ -58,6 +65,7 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   servicesRoute,
+  serviceDetailByIdRoute,
   projectDetailsRoute,
   projectDetailByIdRoute,
   contactUsRoute,
