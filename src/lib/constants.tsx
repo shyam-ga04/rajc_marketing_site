@@ -33,6 +33,20 @@ export interface FeaturedProjectsData {
   items: FeaturedProjectItem[]
 }
 
+export interface DetailedProjectItem extends FeaturedProjectItem {
+  id: string
+  status: "sold" | "available"
+  squareFeet: string
+  price: string
+  overview: string
+  scope: string[]
+  timeline: string
+  clientGoal: string
+  challenge: string
+  solution: string
+  outcome: string
+}
+
 export interface WhyChooseUsData {
   title: string
   items: WhyChooseUsItem[]
@@ -208,46 +222,140 @@ export const DEFAULT_SERVICES_PREVIEW_DATA: ServicesPreviewData = {
   ],
 }
 
+export const PROJECTS_DETAILS_DATA: DetailedProjectItem[] = [
+  {
+    id: "skyline-villa",
+    status: "sold",
+    imageUrl:
+      "https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Modern house exterior design",
+    name: "Skyline Villa",
+    location: "Bengaluru, Karnataka",
+    squareFeet: "4,200 sq ft",
+    price: "INR 2.1 Cr",
+    description:
+      "A contemporary family residence with optimized daylight, ventilation, and durable exterior finishes.",
+    overview:
+      "Skyline Villa is a G+1 premium residential project designed for a multi-generational family. The architectural intent focused on clean geometry, maximum natural light, and efficient internal flow across public and private zones.",
+    scope: [
+      "Complete civil and structural execution",
+      "Facade development with weather-resistant finishes",
+      "Interior fit-outs for kitchen, living, and bedrooms",
+      "MEP coordination and smart lighting integration",
+    ],
+    timeline: "11 months (design coordination to handover)",
+    clientGoal:
+      "Deliver a modern home that stays naturally cool, uses durable materials, and supports low-maintenance living.",
+    challenge:
+      "Plot-side constraints and strict neighborhood regulations impacted crane movement and staging options.",
+    solution:
+      "Adopted phased procurement and a micro-scheduling approach for concrete pours and facade installation.",
+    outcome:
+      "Project was completed on schedule with high finish quality and improved energy performance through better shading and ventilation planning.",
+  },
+  {
+    id: "heritage-court-home",
+    status: "available",
+    imageUrl:
+      "https://images.pexels.com/photos/19365757/pexels-photo-19365757.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Colonial style home exterior",
+    name: "Heritage Court Home",
+    location: "Mysuru, Karnataka",
+    squareFeet: "3,600 sq ft",
+    price: "INR 1.7 Cr",
+    description:
+      "A heritage-inspired home combining traditional facade details with modern structural and utility upgrades.",
+    overview:
+      "This project balanced heritage aesthetics with current safety and utility requirements. The home preserves the original character through proportioned elevations and ornamental details while upgrading structural and service systems.",
+    scope: [
+      "Structural strengthening and seismic compliance improvements",
+      "Facade restoration and detail recreation",
+      "Electrical, plumbing, and waterproofing upgrades",
+      "Custom woodwork and interior surface refinishing",
+    ],
+    timeline: "9 months (restoration and modernization package)",
+    clientGoal:
+      "Retain the home's historic visual identity while improving safety, comfort, and operational reliability.",
+    challenge:
+      "Existing drawings were incomplete and several legacy elements required on-site measurement and rework.",
+    solution:
+      "Executed detailed as-built documentation, mockups for critical heritage features, and a staged approval process.",
+    outcome:
+      "The completed home preserved its original visual story while achieving modern performance and reduced maintenance risk.",
+  },
+  {
+    id: "palm-crest-residence",
+    status: "sold",
+    imageUrl:
+      "https://images.pexels.com/photos/23880098/pexels-photo-23880098.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Mediterranean style house exterior",
+    name: "Palm Crest Residence",
+    location: "Hyderabad, Telangana",
+    squareFeet: "4,850 sq ft",
+    price: "INR 2.4 Cr",
+    description:
+      "A premium two-story residential build focused on outdoor living, landscaping, and weather-resilient materials.",
+    overview:
+      "Palm Crest Residence is a lifestyle-focused project that merges indoor comfort with outdoor utility. The planning emphasizes shaded decks, entertainment zones, and resilient materials for hot-weather conditions.",
+    scope: [
+      "Two-story residential civil works and finishing",
+      "Landscape-ready levels and outdoor living zones",
+      "Rainwater drainage and terrace waterproofing system",
+      "Premium interior finishes and custom staircase detailing",
+    ],
+    timeline: "12 months (turnkey execution)",
+    clientGoal:
+      "Create a premium family home with strong indoor-outdoor connectivity and year-round usability.",
+    challenge:
+      "High summer temperatures and heavy monsoon bursts required careful detailing for long-term durability.",
+    solution:
+      "Applied reflective coatings, deep overhangs, improved slope design, and a reinforced waterproofing stack.",
+    outcome:
+      "The project achieved a durable envelope and high occupant comfort, with outdoor spaces actively used across seasons.",
+  },
+  {
+    id: "greenstone-retreat",
+    status: "available",
+    imageUrl:
+      "https://images.pexels.com/photos/20336639/pexels-photo-20336639.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Rustic stone house exterior",
+    name: "Greenstone Retreat",
+    location: "Coimbatore, Tamil Nadu",
+    squareFeet: "3,950 sq ft",
+    price: "INR 1.9 Cr",
+    description:
+      "A countryside-style project with natural stone textures and low-maintenance construction planning.",
+    overview:
+      "Greenstone Retreat is a low-density countryside residence built around natural material expression and practical upkeep. The project uses stone-forward exteriors, open courtyards, and robust drainage planning.",
+    scope: [
+      "Site grading and foundation works for sloped terrain",
+      "Masonry and stone-clad exterior construction",
+      "Courtyard planning with passive ventilation strategy",
+      "Utility infrastructure and long-life finishing package",
+    ],
+    timeline: "10 months (civil to final handover)",
+    clientGoal:
+      "Build a calm weekend retreat with natural textures and minimal long-term operating effort.",
+    challenge:
+      "Variable terrain and seasonal water runoff created risk for plinth protection and service routing.",
+    solution:
+      "Introduced stepped retaining details, improved surface drainage, and protected underground service corridors.",
+    outcome:
+      "Delivered a resilient countryside home with strong material character and efficient maintenance requirements.",
+  },
+]
+
 export const DEFAULT_FEATURED_PROJECTS_DATA: FeaturedProjectsData = {
   title: "Featured Projects",
-  items: [
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Modern house exterior design",
-      name: "Skyline Villa",
-      location: "Bengaluru, Karnataka",
-      description:
-        "A contemporary family residence with optimized daylight, ventilation, and durable exterior finishes.",
-    },
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/19365757/pexels-photo-19365757.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Colonial style home exterior",
-      name: "Heritage Court Home",
-      location: "Mysuru, Karnataka",
-      description:
-        "A heritage-inspired home combining traditional facade details with modern structural and utility upgrades.",
-    },
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/23880098/pexels-photo-23880098.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Mediterranean style house exterior",
-      name: "Palm Crest Residence",
-      location: "Hyderabad, Telangana",
-      description:
-        "A premium two-story residential build focused on outdoor living, landscaping, and weather-resilient materials.",
-    },
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/20336639/pexels-photo-20336639.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Rustic stone house exterior",
-      name: "Greenstone Retreat",
-      location: "Coimbatore, Tamil Nadu",
-      description:
-        "A countryside-style project with natural stone textures and low-maintenance construction planning.",
-    },
-  ],
+  items: PROJECTS_DETAILS_DATA.map(
+    ({ imageUrl, imageAlt, name, location, description }) => ({
+      imageUrl,
+      imageAlt,
+      name,
+      location,
+      description,
+    })
+  ),
 }
 
 export const DEFAULT_WHY_CHOOSE_US_DATA: WhyChooseUsData = {

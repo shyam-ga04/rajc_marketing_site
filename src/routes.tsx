@@ -4,6 +4,7 @@ import HomeScreen from "./screens/HomeScreen"
 import AboutUs from "./screens/AboutUs"
 import Services from "./screens/Services"
 import Projects from "./screens/Projects"
+import ProjectDetails from "./screens/ProjectDetails"
 import ContactUs from "./screens/ContactUs"
 import AdminLogin from "./screens/AdminLogin"
 
@@ -35,6 +36,12 @@ const projectDetailsRoute = new Route({
   component: Projects,
 })
 
+const projectDetailByIdRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/projects/$projectId",
+  component: ProjectDetails,
+})
+
 const contactUsRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/contact",
@@ -52,6 +59,7 @@ const routeTree = rootRoute.addChildren([
   aboutRoute,
   servicesRoute,
   projectDetailsRoute,
+  projectDetailByIdRoute,
   contactUsRoute,
   adminRoute,
 ])

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router"
 import { Card, CardContent } from "@/components/ui/card"
 import {
-  DEFAULT_FEATURED_PROJECTS_DATA,
+  PROJECTS_DETAILS_DATA,
   type FeaturedProjectsData,
 } from "@/lib/constants"
 
@@ -10,11 +10,24 @@ interface FeaturedProjectsSectionProps {
 }
 
 function FeaturedProjectsSection({ data }: FeaturedProjectsSectionProps) {
+  const fallbackItems = PROJECTS_DETAILS_DATA
+  const items = data?.items ?? fallbackItems
+  const projectIdByName = new Map(
+    PROJECTS_DETAILS_DATA.map((project) => [project.name, project.id])
+  )
+
   const projectsData: FeaturedProjectsData = {
-    ...DEFAULT_FEATURED_PROJECTS_DATA,
+    title: data?.title ?? "Featured Projects",
     ...data,
-    items: data?.items ?? DEFAULT_FEATURED_PROJECTS_DATA.items,
+    items,
   }
+
+  const displayedProjects = projectsData.items.map((project) => ({
+    ...project,
+    id:
+      projectIdByName.get(project.name) ??
+      project.name.toLowerCase().replace(/\s+/g, "-"),
+  }))
 
   return (
     <section className="mx-auto mt-8 w-full max-w-6xl">
@@ -25,8 +38,8 @@ function FeaturedProjectsSection({ data }: FeaturedProjectsSectionProps) {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        {projectsData.items.map((project) => (
-          <Card key={project.name} className="overflow-hidden">
+        {displayedProjects.map((project) => (
+          <Card key={project.id} className="overflow-hidden">
             <img
               src={project.imageUrl}
               alt={project.imageAlt}
@@ -38,7 +51,8 @@ function FeaturedProjectsSection({ data }: FeaturedProjectsSectionProps) {
               <p className="text-sm font-medium text-primary">{project.location}</p>
               <p className="text-sm text-muted-foreground">{project.description}</p>
               <Link
-                to="/project-details"
+                to="/projects/$projectId"
+                params={{ projectId: project.id }}
                 className="inline-flex text-sm font-medium text-primary hover:underline"
               >
                 View project
