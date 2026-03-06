@@ -1,39 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { BadgeCheck, Eye, HeartPulse, ShieldCheck } from "lucide-react"
 import { SCREEN_TEXT } from "@/lib/constants"
 
 function StrengthIcon({ item }: { item: string }) {
   if (item === "Safety") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 3 4 7v6c0 5 3.6 7.6 8 8 4.4-.4 8-3 8-8V7l-8-4Z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
+    return <ShieldCheck className="h-5 w-5" />
   }
 
   if (item === "Quality") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="8" />
-        <path d="m9.5 12 1.6 1.6 3.4-3.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
+    return <BadgeCheck className="h-5 w-5" />
   }
 
   if (item === "Transparency") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="12" cy="12" r="2.5" />
-      </svg>
-    )
+    return <Eye className="h-5 w-5" />
   }
 
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M4 13h4l2 3 4-8 2 5h4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
+  return <HeartPulse className="h-5 w-5" />
 }
 
 function AboutUs() {

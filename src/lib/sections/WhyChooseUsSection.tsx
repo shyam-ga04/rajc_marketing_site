@@ -1,5 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card"
 import {
+  Boxes,
+  Clock3,
+  Eye,
+  ShieldCheck,
+  Truck,
+  Users,
+} from "lucide-react"
+import {
   DEFAULT_WHY_CHOOSE_US_DATA,
   type WhyChooseUsData,
   type WhyChooseUsIconKey,
@@ -11,62 +19,26 @@ interface WhyChooseUsSectionProps {
 
 function WhyChooseUsIcon({ icon }: { icon: WhyChooseUsIconKey }) {
   if (icon === "experience") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
+    return <Clock3 className="h-5 w-5" />
   }
 
   if (icon === "qualityMaterials") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M4 10 12 5l8 5-8 5-8-5Z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 15v4" strokeLinecap="round" />
-        <path d="M7 12.5v3.5l5 3 5-3v-3.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
+    return <Boxes className="h-5 w-5" />
   }
 
   if (icon === "onTimeDelivery") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M3 7h11v8H3z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M14 10h3l3 3v2h-6z" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="7" cy="17" r="2" />
-        <circle cx="17" cy="17" r="2" />
-      </svg>
-    )
+    return <Truck className="h-5 w-5" />
   }
 
   if (icon === "safetyFirst") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 3 4 7v6c0 5 3.6 7.6 8 8 4.4-.4 8-3 8-8V7l-8-4Z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 8v5" strokeLinecap="round" />
-        <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none" />
-      </svg>
-    )
+    return <ShieldCheck className="h-5 w-5" />
   }
 
   if (icon === "skilledTeam") {
-    return (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="8" cy="9" r="2.5" />
-        <circle cx="16" cy="9" r="2.5" />
-        <path d="M4 18c.6-2.2 2.3-3.5 4-3.5s3.4 1.3 4 3.5" strokeLinecap="round" />
-        <path d="M12 18c.6-2.2 2.3-3.5 4-3.5s3.4 1.3 4 3.5" strokeLinecap="round" />
-      </svg>
-    )
+    return <Users className="h-5 w-5" />
   }
 
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M12 3 4 7v6c0 5 3.6 7.6 8 8 4.4-.4 8-3 8-8V7l-8-4Z" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
+  return <Eye className="h-5 w-5" />
 }
 
 function WhyChooseUsSection({ data }: WhyChooseUsSectionProps) {

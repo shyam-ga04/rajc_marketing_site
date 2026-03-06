@@ -1,5 +1,13 @@
 import React from "react"
 import { Link } from "@tanstack/react-router"
+import {
+  Building2,
+  ClipboardList,
+  House,
+  KeyRound,
+  Paintbrush,
+  Wrench,
+} from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   SCREEN_TEXT,
@@ -11,92 +19,26 @@ function ServiceIcon({ name }: { name: string }) {
   const commonClass = "h-5 w-5 text-primary"
 
   if (name.includes("Residential")) {
-    return (
-      <svg viewBox="0 0 24 24" className={commonClass} aria-hidden="true">
-        <path
-          d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    )
+    return <House className={commonClass} aria-hidden="true" />
   }
 
   if (name.includes("Commercial")) {
-    return (
-      <svg viewBox="0 0 24 24" className={commonClass} aria-hidden="true">
-        <path
-          d="M4 21V5h10v16M14 9h6v12M8 9h2m-2 4h2m-2 4h2m8-4h2"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    )
+    return <Building2 className={commonClass} aria-hidden="true" />
   }
 
   if (name.includes("Renovation")) {
-    return (
-      <svg viewBox="0 0 24 24" className={commonClass} aria-hidden="true">
-        <path
-          d="m14 4 6 6m-7.5-4.5L6 12l-2 5 5-2 6.5-6.5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    )
+    return <Wrench className={commonClass} aria-hidden="true" />
   }
 
   if (name.includes("Turnkey")) {
-    return (
-      <svg viewBox="0 0 24 24" className={commonClass} aria-hidden="true">
-        <path
-          d="M14 7a4 4 0 1 0-3.7 5.5L4 19l1 1 1.5-1.5L8 20l2-2-1.5-1.5L10 15l6.5-6.7A4 4 0 0 0 14 7Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    )
+    return <KeyRound className={commonClass} aria-hidden="true" />
   }
 
   if (name.includes("Interior")) {
-    return (
-      <svg viewBox="0 0 24 24" className={commonClass} aria-hidden="true">
-        <path
-          d="M3 20h18M5 20v-6h14v6M8 14V8h8v6M10 8V5h4v3"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    )
+    return <Paintbrush className={commonClass} aria-hidden="true" />
   }
 
-  return (
-    <svg viewBox="0 0 24 24" className={commonClass} aria-hidden="true">
-      <path
-        d="M4 12h8m0 0-3-3m3 3-3 3m4.5-8.5h6.5v11h-6.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
+  return <ClipboardList className={commonClass} aria-hidden="true" />
 }
 
 const Services: React.FC = () => {
