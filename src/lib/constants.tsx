@@ -20,6 +20,17 @@ export interface ServicesPreviewData {
   items: ServicePreviewItem[]
 }
 
+export interface ServiceDetailItem {
+  id: string
+  name: string
+  shortDescription: string
+  fullDescription: string
+  scope: string[]
+  process: string[]
+  deliverables: string[]
+  idealFor: string
+}
+
 export interface FeaturedProjectItem {
   imageUrl: string
   imageAlt: string
@@ -31,6 +42,20 @@ export interface FeaturedProjectItem {
 export interface FeaturedProjectsData {
   title: string
   items: FeaturedProjectItem[]
+}
+
+export interface DetailedProjectItem extends FeaturedProjectItem {
+  id: string
+  status: "sold" | "available"
+  squareFeet: string
+  price: string
+  overview: string
+  scope: string[]
+  timeline: string
+  clientGoal: string
+  challenge: string
+  solution: string
+  outcome: string
 }
 
 export interface WhyChooseUsData {
@@ -158,96 +183,317 @@ export const DEFAULT_QUICK_INTRO_DATA: QuickIntroData = {
     "Residential homes, commercial buildings, renovation projects, and turnkey construction solutions.",
 }
 
+export const SERVICE_DETAILS_DATA: ServiceDetailItem[] = [
+  {
+    id: "residential-construction",
+    name: "Residential Construction",
+    shortDescription:
+      "Custom homes and housing projects built with durable materials and practical layouts.",
+    fullDescription:
+      "Our residential construction service covers complete home development from concept alignment to final handover. We focus on structural safety, functional planning, and long-term usability, ensuring each home reflects client lifestyle needs while maintaining build quality standards.",
+    scope: [
+      "Site preparation, foundation, and structural execution",
+      "Brickwork, plastering, roofing, and exterior finishing",
+      "Internal layouts, room zoning, and utility planning",
+      "Electrical, plumbing, and waterproofing coordination",
+    ],
+    process: [
+      "Requirement discussion and site assessment",
+      "Design coordination and cost planning",
+      "Construction phase execution with milestone reviews",
+      "Quality checks, snag closure, and handover",
+    ],
+    deliverables: [
+      "Completed home as per approved scope",
+      "Material and workmanship quality checklist",
+      "As-built service layout and handover support",
+    ],
+    idealFor:
+      "Homeowners building independent houses, villas, or duplex residences.",
+  },
+  {
+    id: "commercial-construction",
+    name: "Commercial Construction",
+    shortDescription:
+      "Office and retail spaces designed for performance, compliance, and long-term use.",
+    fullDescription:
+      "We deliver commercial buildings that balance operational efficiency, code compliance, and construction speed. The service is structured for offices, retail units, and mixed-use spaces that need robust infrastructure and reliable timelines.",
+    scope: [
+      "Core civil and structural construction",
+      "Commercial-grade electrical and plumbing systems",
+      "Facade and entrance development",
+      "Safety, fire, and compliance-driven execution",
+    ],
+    process: [
+      "Business use-case and facility planning",
+      "BOQ alignment and schedule finalization",
+      "Execution with weekly progress tracking",
+      "Testing, compliance checks, and operational handover",
+    ],
+    deliverables: [
+      "Commercial-ready space with essential utilities",
+      "Compliance-oriented execution documentation",
+      "Handover with completion and inspection records",
+    ],
+    idealFor:
+      "Businesses setting up offices, showrooms, clinics, and retail stores.",
+  },
+  {
+    id: "renovation-remodeling",
+    name: "Renovation & Remodeling",
+    shortDescription:
+      "Modernization and structural upgrades that improve functionality and visual quality.",
+    fullDescription:
+      "Our renovation and remodeling service transforms existing properties into updated, efficient spaces without unnecessary reconstruction. We target layout optimization, service upgrades, and modern finish quality while minimizing disruption.",
+    scope: [
+      "Selective demolition and structural adjustments",
+      "Space reconfiguration and circulation improvement",
+      "Electrical/plumbing replacement and waterproofing fixes",
+      "Interior and exterior refurbishment",
+    ],
+    process: [
+      "Condition assessment and defect mapping",
+      "Upgrade planning with phased execution strategy",
+      "Renovation implementation with controlled downtime",
+      "Final finishing, testing, and closure",
+    ],
+    deliverables: [
+      "Upgraded and optimized built space",
+      "Improved service lines and reduced maintenance risks",
+      "Refreshed interiors/exteriors aligned to new use",
+    ],
+    idealFor:
+      "Owners upgrading old homes, offices, or partially damaged structures.",
+  },
+  {
+    id: "turnkey-projects",
+    name: "Turnkey Projects",
+    shortDescription:
+      "End-to-end delivery from concept, design coordination, and approvals to handover.",
+    fullDescription:
+      "Our turnkey service is a single-point delivery model where we manage every execution stage. From planning and procurement to construction and commissioning, we reduce client coordination burden and provide a predictable outcome.",
+    scope: [
+      "End-to-end project planning and execution management",
+      "Vendor, material, and timeline coordination",
+      "Civil, MEP, and finishing integration",
+      "Testing, commissioning, and handover support",
+    ],
+    process: [
+      "Project definition and budget alignment",
+      "Integrated planning and procurement strategy",
+      "Execution under centralized project management",
+      "Commissioning and complete handover",
+    ],
+    deliverables: [
+      "Fully completed project ready for occupancy/use",
+      "Single accountability from start to finish",
+      "Structured progress and completion reporting",
+    ],
+    idealFor:
+      "Clients who want complete execution with minimal day-to-day coordination.",
+  },
+  {
+    id: "interior-fit-outs",
+    name: "Interior Fit-Outs",
+    shortDescription:
+      "Efficient interior execution for residential and commercial spaces with quality finishing.",
+    fullDescription:
+      "This service focuses on practical and aesthetic interior execution including layout-ready services, ceiling works, modular installations, and final finishes. We optimize utility, appearance, and maintainability for daily use.",
+    scope: [
+      "False ceiling, partitions, and wall treatments",
+      "Flooring, painting, and interior finishing",
+      "Modular furniture and storage integration",
+      "Lighting, switchboards, and utility interface setup",
+    ],
+    process: [
+      "Space study and fit-out requirement capture",
+      "Material palette and execution planning",
+      "Fit-out works with stage-based quality checks",
+      "Snag resolution and final interior handover",
+    ],
+    deliverables: [
+      "Ready-to-use interior spaces",
+      "Functional layout and finish coordination",
+      "Quality-checked fit-out completion",
+    ],
+    idealFor:
+      "Apartment owners, office tenants, and commercial outlets needing interior execution.",
+  },
+  {
+    id: "project-management",
+    name: "Project Management",
+    shortDescription:
+      "Schedule, cost, and vendor coordination to keep projects on time and within budget.",
+    fullDescription:
+      "Our project management service ensures structured control of timeline, cost, quality, and stakeholder communication. We monitor milestones, risks, and procurement flow to keep the project aligned with agreed delivery targets.",
+    scope: [
+      "Master schedule planning and milestone control",
+      "Cost tracking and change management",
+      "Vendor, contractor, and material coordination",
+      "Quality audit and reporting governance",
+    ],
+    process: [
+      "Project baseline setup (scope, time, cost)",
+      "Execution monitoring with periodic dashboards",
+      "Risk review and corrective action planning",
+      "Final closure documentation and handover tracking",
+    ],
+    deliverables: [
+      "Transparent project progress reports",
+      "Issue/risk logs with mitigation actions",
+      "Improved control on schedule and budget outcomes",
+    ],
+    idealFor:
+      "Clients managing multi-vendor or medium-to-large construction programs.",
+  },
+]
+
 export const DEFAULT_SERVICES_PREVIEW_DATA: ServicesPreviewData = {
   title: "Services Preview",
   description:
     "From planning to execution, we deliver complete construction services with reliability and quality.",
-  items: [
-    {
-      name: "Residential Construction",
-      description:
-        "Custom homes and housing projects built with durable materials and practical layouts.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Commercial Construction",
-      description:
-        "Office and retail spaces designed for performance, compliance, and long-term use.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Renovation & Remodeling",
-      description:
-        "Modernization and structural upgrades that improve functionality and visual quality.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Turnkey Projects",
-      description:
-        "End-to-end delivery from concept, design coordination, and approvals to handover.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Interior Fit-Outs",
-      description:
-        "Efficient interior execution for residential and commercial spaces with quality finishing.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-    {
-      name: "Project Management",
-      description:
-        "Schedule, cost, and vendor coordination to keep projects on time and within budget.",
-      linkLabel: "View service",
-      href: "/services",
-    },
-  ],
+  items: SERVICE_DETAILS_DATA.map((service) => ({
+    name: service.name,
+    description: service.shortDescription,
+    linkLabel: "View service",
+    href: "/services",
+  })),
 }
+
+export const PROJECTS_DETAILS_DATA: DetailedProjectItem[] = [
+  {
+    id: "skyline-villa",
+    status: "sold",
+    imageUrl:
+      "https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Modern house exterior design",
+    name: "Skyline Villa",
+    location: "Bengaluru, Karnataka",
+    squareFeet: "4,200 sq ft",
+    price: "INR 2.1 Cr",
+    description:
+      "A contemporary family residence with optimized daylight, ventilation, and durable exterior finishes.",
+    overview:
+      "Skyline Villa is a G+1 premium residential project designed for a multi-generational family. The architectural intent focused on clean geometry, maximum natural light, and efficient internal flow across public and private zones.",
+    scope: [
+      "Complete civil and structural execution",
+      "Facade development with weather-resistant finishes",
+      "Interior fit-outs for kitchen, living, and bedrooms",
+      "MEP coordination and smart lighting integration",
+    ],
+    timeline: "11 months (design coordination to handover)",
+    clientGoal:
+      "Deliver a modern home that stays naturally cool, uses durable materials, and supports low-maintenance living.",
+    challenge:
+      "Plot-side constraints and strict neighborhood regulations impacted crane movement and staging options.",
+    solution:
+      "Adopted phased procurement and a micro-scheduling approach for concrete pours and facade installation.",
+    outcome:
+      "Project was completed on schedule with high finish quality and improved energy performance through better shading and ventilation planning.",
+  },
+  {
+    id: "heritage-court-home",
+    status: "available",
+    imageUrl:
+      "https://images.pexels.com/photos/19365757/pexels-photo-19365757.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Colonial style home exterior",
+    name: "Heritage Court Home",
+    location: "Mysuru, Karnataka",
+    squareFeet: "3,600 sq ft",
+    price: "INR 1.7 Cr",
+    description:
+      "A heritage-inspired home combining traditional facade details with modern structural and utility upgrades.",
+    overview:
+      "This project balanced heritage aesthetics with current safety and utility requirements. The home preserves the original character through proportioned elevations and ornamental details while upgrading structural and service systems.",
+    scope: [
+      "Structural strengthening and seismic compliance improvements",
+      "Facade restoration and detail recreation",
+      "Electrical, plumbing, and waterproofing upgrades",
+      "Custom woodwork and interior surface refinishing",
+    ],
+    timeline: "9 months (restoration and modernization package)",
+    clientGoal:
+      "Retain the home's historic visual identity while improving safety, comfort, and operational reliability.",
+    challenge:
+      "Existing drawings were incomplete and several legacy elements required on-site measurement and rework.",
+    solution:
+      "Executed detailed as-built documentation, mockups for critical heritage features, and a staged approval process.",
+    outcome:
+      "The completed home preserved its original visual story while achieving modern performance and reduced maintenance risk.",
+  },
+  {
+    id: "palm-crest-residence",
+    status: "sold",
+    imageUrl:
+      "https://images.pexels.com/photos/23880098/pexels-photo-23880098.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Mediterranean style house exterior",
+    name: "Palm Crest Residence",
+    location: "Hyderabad, Telangana",
+    squareFeet: "4,850 sq ft",
+    price: "INR 2.4 Cr",
+    description:
+      "A premium two-story residential build focused on outdoor living, landscaping, and weather-resilient materials.",
+    overview:
+      "Palm Crest Residence is a lifestyle-focused project that merges indoor comfort with outdoor utility. The planning emphasizes shaded decks, entertainment zones, and resilient materials for hot-weather conditions.",
+    scope: [
+      "Two-story residential civil works and finishing",
+      "Landscape-ready levels and outdoor living zones",
+      "Rainwater drainage and terrace waterproofing system",
+      "Premium interior finishes and custom staircase detailing",
+    ],
+    timeline: "12 months (turnkey execution)",
+    clientGoal:
+      "Create a premium family home with strong indoor-outdoor connectivity and year-round usability.",
+    challenge:
+      "High summer temperatures and heavy monsoon bursts required careful detailing for long-term durability.",
+    solution:
+      "Applied reflective coatings, deep overhangs, improved slope design, and a reinforced waterproofing stack.",
+    outcome:
+      "The project achieved a durable envelope and high occupant comfort, with outdoor spaces actively used across seasons.",
+  },
+  {
+    id: "greenstone-retreat",
+    status: "available",
+    imageUrl:
+      "https://images.pexels.com/photos/20336639/pexels-photo-20336639.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Rustic stone house exterior",
+    name: "Greenstone Retreat",
+    location: "Coimbatore, Tamil Nadu",
+    squareFeet: "3,950 sq ft",
+    price: "INR 1.9 Cr",
+    description:
+      "A countryside-style project with natural stone textures and low-maintenance construction planning.",
+    overview:
+      "Greenstone Retreat is a low-density countryside residence built around natural material expression and practical upkeep. The project uses stone-forward exteriors, open courtyards, and robust drainage planning.",
+    scope: [
+      "Site grading and foundation works for sloped terrain",
+      "Masonry and stone-clad exterior construction",
+      "Courtyard planning with passive ventilation strategy",
+      "Utility infrastructure and long-life finishing package",
+    ],
+    timeline: "10 months (civil to final handover)",
+    clientGoal:
+      "Build a calm weekend retreat with natural textures and minimal long-term operating effort.",
+    challenge:
+      "Variable terrain and seasonal water runoff created risk for plinth protection and service routing.",
+    solution:
+      "Introduced stepped retaining details, improved surface drainage, and protected underground service corridors.",
+    outcome:
+      "Delivered a resilient countryside home with strong material character and efficient maintenance requirements.",
+  },
+]
 
 export const DEFAULT_FEATURED_PROJECTS_DATA: FeaturedProjectsData = {
   title: "Featured Projects",
-  items: [
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Modern house exterior design",
-      name: "Skyline Villa",
-      location: "Bengaluru, Karnataka",
-      description:
-        "A contemporary family residence with optimized daylight, ventilation, and durable exterior finishes.",
-    },
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/19365757/pexels-photo-19365757.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Colonial style home exterior",
-      name: "Heritage Court Home",
-      location: "Mysuru, Karnataka",
-      description:
-        "A heritage-inspired home combining traditional facade details with modern structural and utility upgrades.",
-    },
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/23880098/pexels-photo-23880098.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Mediterranean style house exterior",
-      name: "Palm Crest Residence",
-      location: "Hyderabad, Telangana",
-      description:
-        "A premium two-story residential build focused on outdoor living, landscaping, and weather-resilient materials.",
-    },
-    {
-      imageUrl:
-        "https://images.pexels.com/photos/20336639/pexels-photo-20336639.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      imageAlt: "Rustic stone house exterior",
-      name: "Greenstone Retreat",
-      location: "Coimbatore, Tamil Nadu",
-      description:
-        "A countryside-style project with natural stone textures and low-maintenance construction planning.",
-    },
-  ],
+  items: PROJECTS_DETAILS_DATA.map(
+    ({ imageUrl, imageAlt, name, location, description }) => ({
+      imageUrl,
+      imageAlt,
+      name,
+      location,
+      description,
+    })
+  ),
 }
 
 export const DEFAULT_WHY_CHOOSE_US_DATA: WhyChooseUsData = {
