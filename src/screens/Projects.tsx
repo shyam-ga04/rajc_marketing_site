@@ -2,7 +2,7 @@ import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { SCREEN_TEXT } from "@/lib/constants"
 
-const ProjectDetails: React.FC = () => {
+const Projects: React.FC = () => {
   return (
     <main className="bg-background px-4 py-8 md:px-8">
       <section className="mx-auto w-full max-w-6xl">
@@ -21,4 +21,4 @@ const ProjectDetails: React.FC = () => {
   )
 }
 
-export default ProjectDetails
+export default Projects
