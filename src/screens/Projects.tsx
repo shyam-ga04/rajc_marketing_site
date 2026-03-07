@@ -1,14 +1,14 @@
 import React from "react"
 import { Link } from "@tanstack/react-router"
 import { Card, CardContent } from "@/components/ui/card"
+import PageSection from "@/lib/components/PageSection"
 import { PROJECTS_DETAILS_DATA, SCREEN_TEXT } from "@/lib/constants"
 
 const Projects: React.FC = () => {
   const projects = PROJECTS_DETAILS_DATA.slice(0, 4)
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-6xl space-y-6">
+    <PageSection>
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
             {SCREEN_TEXT.projectDetails.title}
@@ -20,14 +20,14 @@ const Projects: React.FC = () => {
 
         <div className="grid gap-5 md:grid-cols-2">
           {projects.map((project) => (
-            <Card key={project.id} className="overflow-hidden">
+            <Card key={project.id} className="h-full overflow-hidden">
               <img
                 src={project.imageUrl}
                 alt={project.imageAlt}
                 className="h-56 w-full object-cover"
                 loading="lazy"
               />
-              <CardContent className="space-y-2">
+              <CardContent className="flex h-full flex-col space-y-2">
                 <h2 className="text-xl font-semibold">{project.name}</h2>
                 <p className="text-sm font-medium text-primary">
                   {project.location}
@@ -38,7 +38,7 @@ const Projects: React.FC = () => {
                 <Link
                   to="/projects/$projectId"
                   params={{ projectId: project.id }}
-                  className="inline-flex text-sm font-medium text-primary hover:underline"
+                  className="mt-auto inline-flex text-sm font-medium text-primary hover:underline"
                 >
                   View full details
                 </Link>
@@ -46,8 +46,7 @@ const Projects: React.FC = () => {
             </Card>
           ))}
         </div>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 

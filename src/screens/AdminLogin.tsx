@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import FormField, { formControlClassName } from "@/lib/components/form/FormField"
+import PageSection from "@/lib/components/PageSection"
 import { SCREEN_TEXT } from "@/lib/constants"
 import { signInWithEmailPassword } from "@/lib/firebase/auth"
 
@@ -67,8 +69,11 @@ function AdminLogin() {
   }
 
   return (
-    <main className="bg-background px-4 py-10 md:px-8">
-      <section className="mx-auto w-full max-w-md">
+    <PageSection
+      maxWidthClassName="max-w-md"
+      mainClassName="bg-background px-4 py-10 md:px-8"
+      sectionClassName="space-y-0"
+    >
         <Card className="relative overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-10"
@@ -90,41 +95,29 @@ function AdminLogin() {
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">
-                  {text.emailLabel}
-                </label>
+              <FormField id="email" label={text.emailLabel} error={errors.email}>
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder={text.emailPlaceholder}
-                  className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                  className={formControlClassName}
                   aria-invalid={Boolean(errors.email)}
                 />
-                {errors.email ? (
-                  <p className="text-xs text-destructive">{errors.email}</p>
-                ) : null}
-              </div>
+              </FormField>
 
-              <div className="space-y-2">
-                <label htmlFor="password" className="text-sm font-medium">
-                  {text.passwordLabel}
-                </label>
+              <FormField id="password" label={text.passwordLabel} error={errors.password}>
                 <input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   placeholder={text.passwordPlaceholder}
-                  className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                  className={formControlClassName}
                   aria-invalid={Boolean(errors.password)}
                 />
-                {errors.password ? (
-                  <p className="text-xs text-destructive">{errors.password}</p>
-                ) : null}
-              </div>
+              </FormField>
 
               {serverError ? (
                 <p className="text-sm text-destructive">{serverError}</p>
@@ -139,8 +132,7 @@ function AdminLogin() {
             </form>
           </CardContent>
         </Card>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 

@@ -1,6 +1,11 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import FormField, {
+  formControlClassName,
+  textAreaControlClassName,
+} from "@/lib/components/form/FormField"
+import PageSection from "@/lib/components/PageSection"
 import { SCREEN_TEXT } from "@/lib/constants"
 
 interface ContactFormValues {
@@ -94,8 +99,7 @@ function ContactUs() {
   }
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-6xl">
+    <PageSection maxWidthClassName="max-w-6xl" sectionClassName="space-y-0">
         <Card>
           <CardContent className="space-y-6">
             <h1 className="text-3xl font-semibold tracking-tight">
@@ -107,82 +111,65 @@ function ContactUs() {
 
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    {formText.nameLabel}
-                  </label>
+                <FormField id="name" label={formText.nameLabel} error={errors.name}>
                   <input
                     id="name"
                     type="text"
                     value={values.name}
                     onChange={(event) => handleChange("name", event.target.value)}
                     placeholder={formText.namePlaceholder}
-                    className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    className={formControlClassName}
                     aria-invalid={Boolean(errors.name)}
                   />
-                  {errors.name ? <p className="text-xs text-destructive">{errors.name}</p> : null}
-                </div>
+                </FormField>
 
-                <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-medium">
-                    {formText.phoneLabel}
-                  </label>
+                <FormField id="phone" label={formText.phoneLabel} error={errors.phone}>
                   <input
                     id="phone"
                     type="tel"
                     value={values.phone}
                     onChange={(event) => handleChange("phone", event.target.value)}
                     placeholder={formText.phonePlaceholder}
-                    className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    className={formControlClassName}
                     aria-invalid={Boolean(errors.phone)}
                   />
-                  {errors.phone ? <p className="text-xs text-destructive">{errors.phone}</p> : null}
-                </div>
+                </FormField>
 
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    {formText.emailLabel}
-                  </label>
+                <FormField id="email" label={formText.emailLabel} error={errors.email}>
                   <input
                     id="email"
                     type="email"
                     value={values.email}
                     onChange={(event) => handleChange("email", event.target.value)}
                     placeholder={formText.emailPlaceholder}
-                    className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    className={formControlClassName}
                     aria-invalid={Boolean(errors.email)}
                   />
-                  {errors.email ? <p className="text-xs text-destructive">{errors.email}</p> : null}
-                </div>
+                </FormField>
 
-                <div className="space-y-2">
-                  <label htmlFor="location" className="text-sm font-medium">
-                    {formText.locationLabel}
-                  </label>
+                <FormField id="location" label={formText.locationLabel} error={errors.location}>
                   <input
                     id="location"
                     type="text"
                     value={values.location}
                     onChange={(event) => handleChange("location", event.target.value)}
                     placeholder={formText.locationPlaceholder}
-                    className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    className={formControlClassName}
                     aria-invalid={Boolean(errors.location)}
                   />
-                  {errors.location ? (
-                    <p className="text-xs text-destructive">{errors.location}</p>
-                  ) : null}
-                </div>
+                </FormField>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="budget_range" className="text-sm font-medium">
-                  {formText.budgetRangeLabel}
-                </label>
+              <FormField
+                id="budget_range"
+                label={formText.budgetRangeLabel}
+                error={errors.budgetRange}
+              >
                 <select
                   id="budget_range"
                   value={values.budgetRange}
                   onChange={(event) => handleChange("budgetRange", event.target.value)}
-                  className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring"
+                  className={formControlClassName}
                   aria-invalid={Boolean(errors.budgetRange)}
                 >
                   <option value="">{formText.budgetRangePlaceholder}</option>
@@ -192,28 +179,19 @@ function ContactUs() {
                     </option>
                   ))}
                 </select>
-                {errors.budgetRange ? (
-                  <p className="text-xs text-destructive">{errors.budgetRange}</p>
-                ) : null}
-              </div>
+              </FormField>
 
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  {formText.messageLabel}
-                </label>
+              <FormField id="message" label={formText.messageLabel} error={errors.message}>
                 <textarea
                   id="message"
                   value={values.message}
                   onChange={(event) => handleChange("message", event.target.value)}
                   placeholder={formText.messagePlaceholder}
                   rows={5}
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                  className={textAreaControlClassName}
                   aria-invalid={Boolean(errors.message)}
                 />
-                {errors.message ? (
-                  <p className="text-xs text-destructive">{errors.message}</p>
-                ) : null}
-              </div>
+              </FormField>
 
               {successMessage ? (
                 <p className="text-sm text-green-600">{successMessage}</p>
@@ -223,8 +201,7 @@ function ContactUs() {
             </form>
           </CardContent>
         </Card>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 
