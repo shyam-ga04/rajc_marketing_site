@@ -1,30 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { BadgeCheck, Eye, HeartPulse, ShieldCheck } from "lucide-react"
+import PageSection from "@/lib/components/PageSection"
+import StrengthIcon from "@/lib/components/icons/StrengthIcon"
 import { SCREEN_TEXT } from "@/lib/constants"
-
-function StrengthIcon({ item }: { item: string }) {
-  if (item === "Safety") {
-    return <ShieldCheck className="h-5 w-5" />
-  }
-
-  if (item === "Quality") {
-    return <BadgeCheck className="h-5 w-5" />
-  }
-
-  if (item === "Transparency") {
-    return <Eye className="h-5 w-5" />
-  }
-
-  return <HeartPulse className="h-5 w-5" />
-}
 
 function AboutUs() {
   const about = SCREEN_TEXT.about
   const details = about.details
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-6xl space-y-6">
+    <PageSection>
         <Card>
           <CardContent className="space-y-4">
             <h2 className="text-2xl font-semibold tracking-tight">
@@ -161,8 +145,7 @@ function AboutUs() {
             </div>
           </CardContent>
         </Card>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 

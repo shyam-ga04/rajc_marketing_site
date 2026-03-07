@@ -1,6 +1,8 @@
 import React from "react"
 import { Link, useParams } from "@tanstack/react-router"
 import { Card, CardContent } from "@/components/ui/card"
+import NotFoundCard from "@/lib/components/NotFoundCard"
+import PageSection from "@/lib/components/PageSection"
 import { SERVICE_DETAILS_DATA } from "@/lib/constants"
 
 const ServiceDetails: React.FC = () => {
@@ -9,32 +11,25 @@ const ServiceDetails: React.FC = () => {
 
   if (!service) {
     return (
-      <main className="bg-background px-4 py-8 md:px-8">
-        <section className="mx-auto w-full max-w-4xl">
-          <Card>
-            <CardContent className="space-y-4">
-              <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
-                Service not found
-              </h1>
-              <p className="text-muted-foreground">
-                The requested service details are not available.
-              </p>
-              <Link
-                to="/services"
-                className="inline-flex text-sm font-medium text-primary hover:underline"
-              >
-                Back to services
-              </Link>
-            </CardContent>
-          </Card>
-        </section>
-      </main>
+      <PageSection maxWidthClassName="max-w-4xl" sectionClassName="space-y-0">
+        <NotFoundCard
+          title="Service not found"
+          description="The requested service details are not available."
+          backLink={
+            <Link
+              to="/services"
+              className="inline-flex text-sm font-medium text-primary hover:underline"
+            >
+              Back to services
+            </Link>
+          }
+        />
+      </PageSection>
     )
   }
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-5xl space-y-6">
+    <PageSection maxWidthClassName="max-w-5xl">
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
             {service.name}
@@ -101,8 +96,7 @@ const ServiceDetails: React.FC = () => {
         >
           Back to services
         </Link>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 

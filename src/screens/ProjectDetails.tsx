@@ -2,6 +2,8 @@ import React from "react"
 import { Link, useNavigate, useParams } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import NotFoundCard from "@/lib/components/NotFoundCard"
+import PageSection from "@/lib/components/PageSection"
 import { PROJECTS_DETAILS_DATA } from "@/lib/constants"
 
 const HOME_INTERIOR_IMAGES = [
@@ -50,32 +52,25 @@ const ProjectDetails: React.FC = () => {
 
   if (!project) {
     return (
-      <main className="bg-background px-4 py-8 md:px-8">
-        <section className="mx-auto w-full max-w-4xl">
-          <Card>
-            <CardContent className="space-y-4">
-              <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
-                Project not found
-              </h1>
-              <p className="text-muted-foreground">
-                The requested project details are not available.
-              </p>
-              <Link
-                to="/projects"
-                className="inline-flex text-sm font-medium text-primary hover:underline"
-              >
-                Back to projects
-              </Link>
-            </CardContent>
-          </Card>
-        </section>
-      </main>
+      <PageSection maxWidthClassName="max-w-4xl" sectionClassName="space-y-0">
+        <NotFoundCard
+          title="Project not found"
+          description="The requested project details are not available."
+          backLink={
+            <Link
+              to="/projects"
+              className="inline-flex text-sm font-medium text-primary hover:underline"
+            >
+              Back to projects
+            </Link>
+          }
+        />
+      </PageSection>
     )
   }
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-5xl space-y-6">
+    <PageSection maxWidthClassName="max-w-5xl">
         <div className="relative">
           <img
             src={project.imageUrl}
@@ -174,7 +169,6 @@ const ProjectDetails: React.FC = () => {
             Back to projects
           </Link>
         </div>
-      </section>
 
       {activeImage ? (
         <div
@@ -197,7 +191,7 @@ const ProjectDetails: React.FC = () => {
           />
         </div>
       ) : null}
-    </main>
+    </PageSection>
   )
 }
 

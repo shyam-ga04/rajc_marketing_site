@@ -1,14 +1,14 @@
 import React from "react"
 import { Link } from "@tanstack/react-router"
 import { Card, CardContent } from "@/components/ui/card"
+import PageSection from "@/lib/components/PageSection"
 import { PROJECTS_DETAILS_DATA, SCREEN_TEXT } from "@/lib/constants"
 
 const Projects: React.FC = () => {
   const projects = PROJECTS_DETAILS_DATA.slice(0, 4)
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-6xl space-y-6">
+    <PageSection>
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
             {SCREEN_TEXT.projectDetails.title}
@@ -46,8 +46,7 @@ const Projects: React.FC = () => {
             </Card>
           ))}
         </div>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 

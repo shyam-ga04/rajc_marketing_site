@@ -1,52 +1,19 @@
 import React from "react"
 import { Link } from "@tanstack/react-router"
-import {
-  Building2,
-  ClipboardList,
-  House,
-  KeyRound,
-  Paintbrush,
-  Wrench,
-} from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import PageSection from "@/lib/components/PageSection"
+import ServiceIcon from "@/lib/components/icons/ServiceIcon"
 import {
   SCREEN_TEXT,
   SERVICE_DETAILS_DATA,
   type ServiceDetailItem,
 } from "@/lib/constants"
 
-function ServiceIcon({ name }: { name: string }) {
-  const commonClass = "h-5 w-5 text-primary"
-
-  if (name.includes("Residential")) {
-    return <House className={commonClass} aria-hidden="true" />
-  }
-
-  if (name.includes("Commercial")) {
-    return <Building2 className={commonClass} aria-hidden="true" />
-  }
-
-  if (name.includes("Renovation")) {
-    return <Wrench className={commonClass} aria-hidden="true" />
-  }
-
-  if (name.includes("Turnkey")) {
-    return <KeyRound className={commonClass} aria-hidden="true" />
-  }
-
-  if (name.includes("Interior")) {
-    return <Paintbrush className={commonClass} aria-hidden="true" />
-  }
-
-  return <ClipboardList className={commonClass} aria-hidden="true" />
-}
-
 const Services: React.FC = () => {
   const services: ServiceDetailItem[] = SERVICE_DETAILS_DATA
 
   return (
-    <main className="bg-background px-4 py-8 md:px-8">
-      <section className="mx-auto w-full max-w-6xl space-y-6">
+    <PageSection>
         <Card>
           <CardContent className="space-y-3">
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
@@ -80,8 +47,7 @@ const Services: React.FC = () => {
             </Card>
           ))}
         </div>
-      </section>
-    </main>
+    </PageSection>
   )
 }
 
