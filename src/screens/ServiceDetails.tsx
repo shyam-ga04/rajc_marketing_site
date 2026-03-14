@@ -53,35 +53,6 @@ function IconCard({ item }: { item: IconCardItem }) {
   )
 }
 
-function ImageGrid({
-  images,
-  onPreview,
-}: {
-  images: ImageItem[]
-  onPreview: (image: ImageItem) => void
-}) {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {images.map((image) => (
-        <button
-          key={image.src}
-          type="button"
-          className="overflow-hidden rounded-xl border text-left"
-          onClick={() => onPreview(image)}
-        >
-          <img
-            src={image.src}
-            alt={image.alt}
-            loading="lazy"
-            className="h-52 w-full object-cover transition-transform duration-300 hover:scale-105"
-          />
-          {image.label ? <p className="px-3 py-2 text-sm text-muted-foreground">{image.label}</p> : null}
-        </button>
-      ))}
-    </div>
-  )
-}
-
 function ServiceDetails() {
   const navigate = useNavigate()
   const { serviceId } = useParams({ from: "/services/$serviceId" })
@@ -134,38 +105,6 @@ function ServiceDetails() {
 
   const relatedProjects = PROJECTS_DETAILS_DATA.slice(0, 3)
 
-  const galleryImages: ImageItem[] = [
-    {
-      src: "https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Construction work at site",
-      label: "Construction Work",
-    },
-    {
-      src: "https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Completed modern home",
-      label: "Completed Homes",
-    },
-    {
-      src: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Interior work for residential project",
-      label: "Interior Work",
-    },
-    {
-      src: "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Dining area interior",
-      label: "Interior Work",
-    },
-    {
-      src: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Completed bedroom interior",
-      label: "Completed Homes",
-    },
-    {
-      src: "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Ongoing structure and finishing work",
-      label: "Construction Work",
-    },
-  ]
 
   const whyChooseUs: IconCardItem[] = [
     { title: "Experienced Civil Engineers", icon: HardHat },
@@ -311,13 +250,6 @@ function ServiceDetails() {
               </Card>
             ))}
           </div>
-        </section>
-
-        <Separator />
-
-        <section className="space-y-4">
-          <SectionHeader title="Gallery Section" />
-          <ImageGrid images={galleryImages} onPreview={setPreviewImage} />
         </section>
 
         <Separator />

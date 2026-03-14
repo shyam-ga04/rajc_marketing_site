@@ -23,7 +23,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -91,8 +96,12 @@ function SectionHeading({
 }) {
   return (
     <div className="space-y-2">
-      <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
-      {description ? <p className="max-w-3xl text-muted-foreground">{description}</p> : null}
+      <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+        {title}
+      </h2>
+      {description ? (
+        <p className="max-w-3xl text-muted-foreground">{description}</p>
+      ) : null}
     </div>
   )
 }
@@ -120,7 +129,9 @@ function GalleryGrid({
             className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
           {image.category ? (
-            <div className="px-3 py-2 text-sm text-muted-foreground">{image.category}</div>
+            <div className="px-3 py-2 text-sm text-muted-foreground">
+              {image.category}
+            </div>
           ) : null}
         </button>
       ))}
@@ -277,15 +288,18 @@ function ProjectDetails() {
     },
     {
       title: "Kitchen",
-      description: "Granite counter, stainless steel sink, and modular-ready utility points.",
+      description:
+        "Granite counter, stainless steel sink, and modular-ready utility points.",
     },
     {
       title: "Doors",
-      description: "Teak wood main door and engineered wood internal doors with quality fittings.",
+      description:
+        "Teak wood main door and engineered wood internal doors with quality fittings.",
     },
     {
       title: "Windows",
-      description: "Powder-coated aluminum sliding windows with mosquito mesh provision.",
+      description:
+        "Powder-coated aluminum sliding windows with mosquito mesh provision.",
     },
     {
       title: "Electrical",
@@ -310,20 +324,6 @@ function ProjectDetails() {
       builtUpArea: "2200 sq ft",
       bookingAmount: "INR 5 Lakhs",
     },
-    {
-      propertyType: "3.5BHK Villa",
-      price: "INR 1.45 Cr",
-      plotSize: "1800 sq ft",
-      builtUpArea: "2500 sq ft",
-      bookingAmount: "INR 7 Lakhs",
-    },
-    {
-      propertyType: "4BHK Villa",
-      price: "INR 1.8 Cr",
-      plotSize: "2200 sq ft",
-      builtUpArea: "3000 sq ft",
-      bookingAmount: "INR 10 Lakhs",
-    },
   ]
 
   const progressStages: StageProgress[] = [
@@ -331,13 +331,15 @@ function ProjectDetails() {
       id: "foundation",
       label: "Foundation",
       status: "Completed",
-      details: "Footing and basement works completed with quality and soil safety checks.",
+      details:
+        "Footing and basement works completed with quality and soil safety checks.",
     },
     {
       id: "structure",
       label: "Structure",
       status: "Completed",
-      details: "Main structural frame and slab casting completed for all blocks.",
+      details:
+        "Main structural frame and slab casting completed for all blocks.",
     },
     {
       id: "plastering",
@@ -349,7 +351,8 @@ function ProjectDetails() {
       id: "finishing",
       label: "Finishing",
       status: "Upcoming",
-      details: "Flooring, painting, and fittings will begin after plaster curing.",
+      details:
+        "Flooring, painting, and fittings will begin after plaster curing.",
     },
     {
       id: "completion",
@@ -359,37 +362,21 @@ function ProjectDetails() {
     },
   ]
 
-  const faqs = [
-    {
-      question: "What is the expected handover date?",
-      answer: "Current expected handover is within 10 to 12 months depending on unit type.",
-    },
-    {
-      question: "Is bank loan assistance available?",
-      answer:
-        "Yes. Loan support is available through major banks with on-site document assistance.",
-    },
-    {
-      question: "Can we customize interiors?",
-      answer:
-        "Interior customization is available for selected units before finishing stage.",
-    },
-    {
-      question: "What are the maintenance charges?",
-      answer:
-        "Maintenance estimates are shared in the final agreement based on unit and amenities.",
-    },
-  ]
-
   const relatedProjects = useMemo(
-    () => PROJECTS_DETAILS_DATA.filter((item) => item.id !== project.id).slice(0, 4),
+    () =>
+      PROJECTS_DETAILS_DATA.filter((item) => item.id !== project.id).slice(
+        0,
+        4,
+      ),
     [project.id],
   )
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" })
     setIsContentVisible(false)
-    const frameId = window.requestAnimationFrame(() => setIsContentVisible(true))
+    const frameId = window.requestAnimationFrame(() =>
+      setIsContentVisible(true),
+    )
 
     return () => window.cancelAnimationFrame(frameId)
   }, [projectId])
@@ -407,348 +394,404 @@ function ProjectDetails() {
           isContentVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-      <Card className="overflow-hidden">
-        <img
-          src={project.imageUrl}
-          alt={project.imageAlt}
-          className="h-72 w-full object-cover md:h-[420px]"
-          loading="lazy"
-        />
-        <CardContent className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <Badge
-              variant={projectStatus === "Ready to Move" ? "default" : "secondary"}
-              className="text-xs uppercase"
-            >
-              {projectStatus}
-            </Badge>
-            <Badge variant="outline">{project.location}</Badge>
+        <Card className="overflow-hidden">
+          <img
+            src={project.imageUrl}
+            alt={project.imageAlt}
+            className="h-72 w-full object-cover md:h-[420px]"
+            loading="lazy"
+          />
+          <CardContent className="space-y-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge
+                variant={
+                  projectStatus === "Ready to Move" ? "default" : "secondary"
+                }
+                className="text-xs uppercase"
+              >
+                {projectStatus}
+              </Badge>
+              <Badge variant="outline">{project.location}</Badge>
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
+                {project.name}
+              </h1>
+              <p className="text-muted-foreground">
+                Contemporary villas engineered for practical luxury and
+                long-term durability.
+              </p>
+              <p className="text-base font-semibold text-primary">
+                Price starting from {project.price}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                onClick={() => navigate({ to: "/contact" })}
+              >
+                Enquire
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading
+            title="Project Overview"
+            description={project.overview}
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {overviewStats.map((stat) => (
+              <Card key={stat.label}>
+                <CardContent className="space-y-1 p-4">
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                    {stat.label}
+                  </p>
+                  <p className="text-sm font-semibold">{stat.value}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-          <div className="space-y-2">
-            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{project.name}</h1>
-            <p className="text-muted-foreground">
-              Contemporary villas engineered for practical luxury and long-term durability.
-            </p>
-            <p className="text-base font-semibold text-primary">Price starting from {project.price}</p>
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Key Highlights" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {highlights.map((item) => (
+              <Card key={item.title}>
+                <CardContent className="flex items-center gap-3 p-4">
+                  <item.icon className="h-5 w-5 text-primary" />
+                  <p className="font-medium">{item.title}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Button type="button" onClick={() => navigate({ to: "/contact" })}>
-              Enquire
-            </Button>
-            <Button type="button" variant="outline" onClick={() => navigate({ to: "/contact" })}>
-              Book Site Visit
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        </section>
 
-      <Separator />
+        <Separator />
 
-      <section className="space-y-4">
-        <SectionHeading title="Project Overview" description={project.overview} />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {overviewStats.map((stat) => (
-            <Card key={stat.label}>
-              <CardContent className="space-y-1 p-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">{stat.label}</p>
-                <p className="text-sm font-semibold">{stat.value}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Key Highlights" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {highlights.map((item) => (
-            <Card key={item.title}>
-              <CardContent className="flex items-center gap-3 p-4">
-                <item.icon className="h-5 w-5 text-primary" />
-                <p className="font-medium">{item.title}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Property Details" />
-        <Card>
-          <CardContent className="p-0">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Property Type</TableHead>
-                  <TableHead>Bedrooms</TableHead>
-                  <TableHead>Bathrooms</TableHead>
-                  <TableHead>Plot Size</TableHead>
-                  <TableHead>Built-up Area</TableHead>
-                  <TableHead>Facing</TableHead>
-                  <TableHead>Parking</TableHead>
-                  <TableHead>Floors</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {propertyDetails.map((row) => (
-                  <TableRow key={`${row.propertyType}-${row.plotSize}`}>
-                    <TableCell>{row.propertyType}</TableCell>
-                    <TableCell>{row.bedrooms}</TableCell>
-                    <TableCell>{row.bathrooms}</TableCell>
-                    <TableCell>{row.plotSize}</TableCell>
-                    <TableCell>{row.builtUpArea}</TableCell>
-                    <TableCell>{row.facing}</TableCell>
-                    <TableCell>{row.parking}</TableCell>
-                    <TableCell>{row.floors}</TableCell>
+        <section className="space-y-4">
+          <SectionHeading title="Property Details" />
+          <Card>
+            <CardContent className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Property Type</TableHead>
+                    <TableHead>Bedrooms</TableHead>
+                    <TableHead>Bathrooms</TableHead>
+                    <TableHead>Plot Size</TableHead>
+                    <TableHead>Built-up Area</TableHead>
+                    <TableHead>Facing</TableHead>
+                    <TableHead>Parking</TableHead>
+                    <TableHead>Floors</TableHead>
                   </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {propertyDetails.map((row) => (
+                    <TableRow key={`${row.propertyType}-${row.plotSize}`}>
+                      <TableCell>{row.propertyType}</TableCell>
+                      <TableCell>{row.bedrooms}</TableCell>
+                      <TableCell>{row.bathrooms}</TableCell>
+                      <TableCell>{row.plotSize}</TableCell>
+                      <TableCell>{row.builtUpArea}</TableCell>
+                      <TableCell>{row.facing}</TableCell>
+                      <TableCell>{row.parking}</TableCell>
+                      <TableCell>{row.floors}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Floor Plans" />
+          <GalleryGrid images={floorPlans} onPreview={setPreviewImage} />
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Project Gallery" />
+          <GalleryGrid images={galleryImages} onPreview={setPreviewImage} />
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Amenities / Features" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {amenities.map((amenity) => (
+              <Card key={amenity.label}>
+                <CardContent className="flex items-center gap-3 p-4">
+                  <amenity.icon className="h-5 w-5 text-primary" />
+                  <p className="font-medium">{amenity.label}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Construction Specifications" />
+          <Card>
+            <CardContent>
+              <Accordion>
+                {specifications.map((spec) => (
+                  <AccordionItem key={spec.title}>
+                    <AccordionTrigger>{spec.title}</AccordionTrigger>
+                    <AccordionContent>{spec.description}</AccordionContent>
+                  </AccordionItem>
                 ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </section>
+              </Accordion>
+            </CardContent>
+          </Card>
+        </section>
 
-      <Separator />
+        <Separator />
 
-      <section className="space-y-4">
-        <SectionHeading title="Floor Plans" />
-        <GalleryGrid images={floorPlans} onPreview={setPreviewImage} />
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Project Gallery" />
-        <GalleryGrid images={galleryImages} onPreview={setPreviewImage} />
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Amenities / Features" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {amenities.map((amenity) => (
-            <Card key={amenity.label}>
-              <CardContent className="flex items-center gap-3 p-4">
-                <amenity.icon className="h-5 w-5 text-primary" />
-                <p className="font-medium">{amenity.label}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Construction Specifications" />
-        <Card>
-          <CardContent>
-            <Accordion>
-              {specifications.map((spec) => (
-                <AccordionItem key={spec.title}>
-                  <AccordionTrigger>{spec.title}</AccordionTrigger>
-                  <AccordionContent>{spec.description}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </CardContent>
-        </Card>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Location Advantages" />
-        <Card>
-          <CardContent className="space-y-4">
-            <div className="overflow-hidden rounded-lg border">
-              <iframe
-                title={`${project.name} location`}
-                src={`https://www.google.com/maps?q=${encodeURIComponent(project.location)}&output=embed`}
-                className="h-72 w-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              {nearbyLocations.map((item) => (
-                <Card key={item.place} className="shadow-none">
-                  <CardContent className="space-y-1 p-4">
-                    <p className="text-sm font-semibold">{item.place}</p>
-                    <p className="text-sm text-muted-foreground">{item.distance}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Pricing Section" />
-        <div className="grid gap-4 md:grid-cols-3">
-          {pricingPlans.map((plan) => (
-            <Card key={plan.propertyType}>
-              <CardContent className="space-y-3 p-5">
-                <h3 className="text-lg font-semibold">{plan.propertyType}</h3>
-                <p className="text-xl font-semibold text-primary">{plan.price}</p>
-                <p className="text-sm text-muted-foreground">Plot Size: {plan.plotSize}</p>
-                <p className="text-sm text-muted-foreground">Built-up Area: {plan.builtUpArea}</p>
-                <p className="text-sm text-muted-foreground">
-                  Booking Amount: {plan.bookingAmount}
-                </p>
-                <Button type="button" className="w-full" onClick={() => navigate({ to: "/contact" })}>
-                  Book This Unit
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Construction Progress" />
-        <Card>
-          <CardContent className="space-y-4">
-            <Tabs defaultValue={progressStages[0].id}>
-              <TabsList className="w-full flex-wrap gap-1 bg-transparent p-0">
-                {progressStages.map((stage) => (
-                  <TabsTrigger key={stage.id} value={stage.id} className="border border-border">
-                    {stage.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              {progressStages.map((stage) => (
-                <TabsContent key={stage.id} value={stage.id}>
-                  <div className="rounded-lg border bg-muted/20 p-4">
-                    <div className="mb-2 flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
-                      <p className="font-semibold">{stage.label}</p>
-                      <Badge variant="outline">{stage.status}</Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">{stage.details}</p>
-                  </div>
-                </TabsContent>
-              ))}
-            </Tabs>
-          </CardContent>
-        </Card>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="FAQ Section" />
-        <Card>
-          <CardContent>
-            <Accordion>
-              {faqs.map((faq) => (
-                <AccordionItem key={faq.question}>
-                  <AccordionTrigger>{faq.question}</AccordionTrigger>
-                  <AccordionContent>{faq.answer}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </CardContent>
-        </Card>
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <SectionHeading title="Enquiry Form" />
-        <Card>
-          <CardContent>
-            <form className="space-y-4" onSubmit={handleEnquirySubmit}>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label htmlFor="enquiry_name" className="text-sm font-medium">
-                    Name
-                  </label>
-                  <Input id="enquiry_name" placeholder="Enter your name" required />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="enquiry_phone" className="text-sm font-medium">
-                    Phone
-                  </label>
-                  <Input id="enquiry_phone" placeholder="Enter your phone number" required />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="enquiry_email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <Input id="enquiry_email" type="email" placeholder="Enter your email" required />
-                </div>
-                <div className="space-y-2 md:col-span-2">
-                  <label htmlFor="enquiry_message" className="text-sm font-medium">
-                    Message
-                  </label>
-                  <Textarea id="enquiry_message" placeholder="Tell us about your requirement" />
-                </div>
+        <section className="space-y-4">
+          <SectionHeading title="Location" />
+          <Card>
+            <CardContent className="space-y-4">
+              <div className="overflow-hidden rounded-lg border">
+                <iframe
+                  title={`${project.name} location`}
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(project.location)}&output=embed`}
+                  className="h-72 w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
-              {enquirySuccess ? <p className="text-sm text-green-600">{enquirySuccess}</p> : null}
-              <Button type="submit">Submit Enquiry</Button>
-            </form>
-          </CardContent>
-        </Card>
-      </section>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                {nearbyLocations.map((item) => (
+                  <Card key={item.place} className="shadow-none">
+                    <CardContent className="space-y-1 p-4">
+                      <p className="text-sm font-semibold">{item.place}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.distance}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </section>
 
-      <Separator />
+        <Separator />
 
-      <section className="space-y-4">
-        <SectionHeading title="Related Projects" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {relatedProjects.map((related) => (
-            <Card key={related.id} className="h-full overflow-hidden">
-              <img
-                src={related.imageUrl}
-                alt={related.imageAlt}
-                loading="lazy"
-                className="h-40 w-full object-cover"
-              />
-              <CardContent className="flex h-full flex-col space-y-2 p-4">
-                <h3 className="font-semibold">{related.name}</h3>
-                <p className="text-sm text-muted-foreground">{related.location}</p>
-                <p className="text-sm font-medium text-primary">Starting from {related.price}</p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="mt-auto w-full"
-                  onClick={() => navigate({ to: "/projects/$projectId", params: { projectId: related.id } })}
-                >
-                  View details
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+        <section className="space-y-4">
+          <SectionHeading title="Pricing Section" />
+          <div className="grid gap-4 md:grid-cols-3">
+            {pricingPlans.map((plan) => (
+              <Card key={plan.propertyType}>
+                <CardContent className="space-y-3 p-5">
+                  <h3 className="text-lg font-semibold">{plan.propertyType}</h3>
+                  <p className="text-xl font-semibold text-primary">
+                    {plan.price}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Plot Size: {plan.plotSize}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Built-up Area: {plan.builtUpArea}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Booking Amount: {plan.bookingAmount}
+                  </p>
+                  <Button
+                    type="button"
+                    className="w-full"
+                    onClick={() => navigate({ to: "/contact" })}
+                  >
+                    Book This Unit
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
 
-      <Dialog open={Boolean(previewImage)} onOpenChange={(open) => !open && setPreviewImage(null)}>
-        <DialogContent className="max-w-5xl p-4">
-          {previewImage ? (
-            <>
-              <DialogHeader>
-                <DialogTitle>{previewImage.category ?? "Image Preview"}</DialogTitle>
-              </DialogHeader>
-              <img
-                src={previewImage.src}
-                alt={previewImage.alt}
-                className="mt-4 max-h-[80vh] w-full rounded-lg object-contain"
-              />
-            </>
-          ) : null}
-        </DialogContent>
-      </Dialog>
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Construction Progress" />
+          <Card>
+            <CardContent className="space-y-4">
+              <Tabs defaultValue={progressStages[0].id}>
+                <TabsList className="w-full flex-wrap gap-1 bg-transparent p-0">
+                  {progressStages.map((stage) => (
+                    <TabsTrigger
+                      key={stage.id}
+                      value={stage.id}
+                      className="border border-border"
+                    >
+                      {stage.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+                {progressStages.map((stage) => (
+                  <TabsContent key={stage.id} value={stage.id}>
+                    <div className="rounded-lg border bg-muted/20 p-4">
+                      <div className="mb-2 flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        <p className="font-semibold">{stage.label}</p>
+                        <Badge variant="outline">{stage.status}</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {stage.details}
+                      </p>
+                    </div>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </CardContent>
+          </Card>
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Enquiry Form" />
+          <Card>
+            <CardContent>
+              <form className="space-y-4" onSubmit={handleEnquirySubmit}>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="enquiry_name"
+                      className="text-sm font-medium"
+                    >
+                      Name
+                    </label>
+                    <Input
+                      id="enquiry_name"
+                      placeholder="Enter your name"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="enquiry_phone"
+                      className="text-sm font-medium"
+                    >
+                      Phone
+                    </label>
+                    <Input
+                      id="enquiry_phone"
+                      placeholder="Enter your phone number"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="enquiry_email"
+                      className="text-sm font-medium"
+                    >
+                      Email
+                    </label>
+                    <Input
+                      id="enquiry_email"
+                      type="email"
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <label
+                      htmlFor="enquiry_message"
+                      className="text-sm font-medium"
+                    >
+                      Message
+                    </label>
+                    <Textarea
+                      id="enquiry_message"
+                      placeholder="Tell us about your requirement"
+                    />
+                  </div>
+                </div>
+                {enquirySuccess ? (
+                  <p className="text-sm text-green-600">{enquirySuccess}</p>
+                ) : null}
+                <Button type="submit">Submit Enquiry</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </section>
+
+        <Separator />
+
+        <section className="space-y-4">
+          <SectionHeading title="Related Projects" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {relatedProjects.map((related) => (
+              <Card key={related.id} className="h-full overflow-hidden">
+                <img
+                  src={related.imageUrl}
+                  alt={related.imageAlt}
+                  loading="lazy"
+                  className="h-40 w-full object-cover"
+                />
+                <CardContent className="flex h-full flex-col space-y-2 p-4">
+                  <h3 className="font-semibold">{related.name}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {related.location}
+                  </p>
+                  <p className="text-sm font-medium text-primary">
+                    Starting from {related.price}
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="mt-auto w-full"
+                    onClick={() =>
+                      navigate({
+                        to: "/projects/$projectId",
+                        params: { projectId: related.id },
+                      })
+                    }
+                  >
+                    View details
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <Dialog
+          open={Boolean(previewImage)}
+          onOpenChange={(open) => !open && setPreviewImage(null)}
+        >
+          <DialogContent className="max-w-5xl p-4">
+            {previewImage ? (
+              <>
+                <DialogHeader>
+                  <DialogTitle>
+                    {previewImage.category ?? "Image Preview"}
+                  </DialogTitle>
+                </DialogHeader>
+                <img
+                  src={previewImage.src}
+                  alt={previewImage.alt}
+                  className="mt-4 max-h-[80vh] w-full rounded-lg object-contain"
+                />
+              </>
+            ) : null}
+          </DialogContent>
+        </Dialog>
       </div>
     </PageSection>
   )

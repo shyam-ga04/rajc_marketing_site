@@ -256,9 +256,6 @@ function Services() {
               execution guidance.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button type="button" onClick={() => navigate({ to: "/contact" })}>
-                Get Free Consultation
-              </Button>
               <Button type="button" variant="outline" onClick={() => navigate({ to: "/contact" })}>
                 Contact Us
               </Button>
