@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import FormField, { formControlClassName } from "@/lib/components/form/FormField"
@@ -33,6 +34,7 @@ function validateForm(email: string, password: string) {
 
 function AdminLogin() {
   const text = SCREEN_TEXT.adminLogin
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors, setErrors] = useState<FormErrors>({})
@@ -55,8 +57,8 @@ function AdminLogin() {
     try {
       setIsSubmitting(true)
       const result = await signInWithEmailPassword(email.trim(), password)
-      setSuccessMessage(`${text.signedInPrefix} ${result.email}`)
-      setPassword("")
+      sessionStorage.setItem('adminToken', result.idToken)
+      navigate({ to: '/admin/dashboard' })
     } catch (error) {
       setServerError(
         error instanceof Error
