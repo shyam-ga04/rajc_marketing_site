@@ -22,7 +22,7 @@ export const createCompanyDetails = async (payload: any) => {
 export const updateCompanyDetails = async (payload: any, id: number) => {
   try {
     const response = await axios.patch(
-      `${apiEndPoint}/admin/company/${id}`,
+      `${apiEndPoint}/admin/company/update/${id}`,
       payload,
       {},
     )

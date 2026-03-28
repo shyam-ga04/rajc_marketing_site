@@ -191,6 +191,7 @@ function AdminProjects() {
             </DialogHeader>
             <Separator />
             <ProjectForm
+              key={editingProject?.id ?? 'new'}
               project={editingProject}
               onSave={handleSave}
               onCancel={() => setDialogOpen(false)}

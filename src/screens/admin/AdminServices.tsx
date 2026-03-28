@@ -174,6 +174,7 @@ function AdminServices() {
             </DialogHeader>
             <Separator />
             <ServiceForm
+              key={editingService?.id ?? 'new'}
               service={editingService}
               onSave={handleSave}
               onCancel={() => setDialogOpen(false)}

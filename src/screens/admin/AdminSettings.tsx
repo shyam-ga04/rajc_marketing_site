@@ -7,8 +7,11 @@ import FormField, {
   formControlClassName,
   textAreaControlClassName,
 } from "@/lib/components/form/FormField"
-import { getCompanyDetails, updateCompanyDetails } from "@/lib/api/admin"
-import { DEFAULT_FOOTER_DATA, DEFAULT_ABOUT_DETAIL_DATA } from "@/lib/constants"
+import {
+  getCompanyDetails,
+  createCompanyDetails,
+  updateCompanyDetails,
+} from "@/lib/api/admin"
 import { Save, Building2, BookOpen } from "lucide-react"
 import AdminLayout from "./AdminLayout"
 
@@ -46,53 +49,51 @@ function SaveBar({ isSaving, saveMessage }: SaveBarProps) {
 function AdminSettings() {
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState("")
+  const [recordExists, setRecordExists] = useState(false)
 
   // Company Info tab
-  const [companyName, setCompanyName] = useState(
-    DEFAULT_FOOTER_DATA.companyName,
-  )
-  const [tagline, setTagline] = useState(
-    "We build spaces that hold people, purpose, and possibility.",
-  )
-  const [address, setAddress] = useState(DEFAULT_FOOTER_DATA.address)
-  const [phone, setPhone] = useState(DEFAULT_FOOTER_DATA.phone)
-  const [whatsapp, setWhatsapp] = useState(DEFAULT_FOOTER_DATA.phone)
-  const [email, setEmail] = useState(DEFAULT_FOOTER_DATA.email)
-  const [website, setWebsite] = useState("www.rajconstructions.com")
+  const [contactNumber, setContactNumber] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [flatNo, setFlatNo] = useState("")
+  const [address, setAddress] = useState("")
+  const [city, setCity] = useState("")
+  const [country, setCountry] = useState("")
+  const [pinCode, setPinCode] = useState("")
+  const [companySummary, setCompanySummary] = useState("")
+  const [companyFoundedYear, setCompanyFoundedYear] = useState("")
+  const [latitude, setLatitude] = useState("")
+  const [longitude, setLongitude] = useState("")
 
   // About & Leadership tab
-  const [yearsExperience, setYearsExperience] = useState(
-    DEFAULT_ABOUT_DETAIL_DATA.companyIntroduction.yearsInBusinessValue,
-  )
-  const [mission, setMission] = useState(
-    DEFAULT_ABOUT_DETAIL_DATA.missionVision.mission,
-  )
-  const [vision, setVision] = useState(
-    DEFAULT_ABOUT_DETAIL_DATA.missionVision.vision,
-  )
-  const [founderName, setFounderName] = useState(
-    DEFAULT_ABOUT_DETAIL_DATA.leadership.name,
-  )
-  const [founderRole, setFounderRole] = useState(
-    DEFAULT_ABOUT_DETAIL_DATA.leadership.role,
-  )
+  const [founderName, setFounderName] = useState("")
+  const [founderDegrees, setFounderDegrees] = useState("")
+  const [founderSummary, setFounderSummary] = useState("")
+  const [mission, setMission] = useState("")
+  const [vision, setVision] = useState("")
+  const [keyMilestones, setKeyMilestones] = useState("")
 
   useEffect(() => {
     getCompanyDetails(COMPANY_ID).then((res) => {
       if (!res?.data) return
       const d = res.data as Record<string, string>
-      if (d.companyName) setCompanyName(d.companyName)
+      setRecordExists(true)
+      if (d.contact_number) setContactNumber(d.contact_number)
+      if (d.contact_email) setContactEmail(d.contact_email)
+      if (d.flat_no) setFlatNo(d.flat_no)
       if (d.address) setAddress(d.address)
-      if (d.phone) setPhone(d.phone)
-      if (d.whatsapp) setWhatsapp(d.whatsapp)
-      if (d.email) setEmail(d.email)
-      if (d.website) setWebsite(d.website)
-      if (d.tagline) setTagline(d.tagline)
-      if (d.yearsExperience) setYearsExperience(d.yearsExperience)
+      if (d.city) setCity(d.city)
+      if (d.country) setCountry(d.country)
+      if (d.pin_code) setPinCode(d.pin_code)
+      if (d.company_summary) setCompanySummary(d.company_summary)
+      if (d.company_founded_year) setCompanyFoundedYear(d.company_founded_year)
+      if (d.Latitude) setLatitude(d.Latitude)
+      if (d.longitude) setLongitude(d.longitude)
+      if (d.founder_name) setFounderName(d.founder_name)
+      if (d.founder_degrees) setFounderDegrees(d.founder_degrees)
+      if (d.founder_summary) setFounderSummary(d.founder_summary)
       if (d.mission) setMission(d.mission)
       if (d.vision) setVision(d.vision)
-      if (d.founderName) setFounderName(d.founderName)
-      if (d.founderRole) setFounderRole(d.founderRole)
+      if (d.key_milestones) setKeyMilestones(d.key_milestones)
     })
   }, [])
 
@@ -105,10 +106,25 @@ function AdminSettings() {
     e.preventDefault()
     setIsSaving(true)
     try {
-      await updateCompanyDetails(
-        { companyName, tagline, address, phone, whatsapp, email, website },
-        COMPANY_ID,
-      )
+      const payload = {
+        contact_number: contactNumber,
+        contact_email: contactEmail,
+        flat_no: flatNo,
+        address,
+        city,
+        country,
+        pin_code: pinCode,
+        company_summary: companySummary,
+        company_founded_year: companyFoundedYear,
+        Latitude: latitude,
+        longitude,
+      }
+      if (recordExists) {
+        await updateCompanyDetails(payload, COMPANY_ID)
+      } else {
+        await createCompanyDetails(payload)
+        setRecordExists(true)
+      }
       showFeedback("Company details saved successfully.")
     } catch {
       showFeedback("Failed to save. Please try again.")
@@ -121,10 +137,20 @@ function AdminSettings() {
     e.preventDefault()
     setIsSaving(true)
     try {
-      await updateCompanyDetails(
-        { yearsExperience, mission, vision, founderName, founderRole },
-        COMPANY_ID,
-      )
+      const payload = {
+        founder_name: founderName,
+        founder_degrees: founderDegrees,
+        founder_summary: founderSummary,
+        mission,
+        vision,
+        key_milestones: keyMilestones,
+      }
+      if (recordExists) {
+        await updateCompanyDetails(payload, COMPANY_ID)
+      } else {
+        await createCompanyDetails(payload)
+        setRecordExists(true)
+      }
       showFeedback("About details saved successfully.")
     } catch {
       showFeedback("Failed to save. Please try again.")
@@ -161,70 +187,107 @@ function AdminSettings() {
               <CardContent className="pt-6">
                 <form onSubmit={handleSaveCompany} className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <FormField id="s-cname" label="Company Name">
-                      <input
-                        id="s-cname"
-                        value={companyName}
-                        onChange={(e) => setCompanyName(e.target.value)}
-                        placeholder="RAJ Constructions"
-                        className={formControlClassName}
-                      />
-                    </FormField>
-                    <FormField id="s-website" label="Website">
-                      <input
-                        id="s-website"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
-                        placeholder="www.rajconstructions.com"
-                        className={formControlClassName}
-                      />
-                    </FormField>
-                    <FormField id="s-phone" label="Phone Number">
+                    <FormField id="s-phone" label="Contact Number">
                       <input
                         id="s-phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        value={contactNumber}
+                        onChange={(e) => setContactNumber(e.target.value)}
                         placeholder="+91 98765 43210"
                         className={formControlClassName}
                       />
                     </FormField>
-                    <FormField id="s-whatsapp" label="WhatsApp Number">
-                      <input
-                        id="s-whatsapp"
-                        value={whatsapp}
-                        onChange={(e) => setWhatsapp(e.target.value)}
-                        placeholder="+91 98765 43210"
-                        className={formControlClassName}
-                      />
-                    </FormField>
-                    <FormField id="s-email" label="Email Address">
+                    <FormField id="s-email" label="Contact Email">
                       <input
                         id="s-email"
                         type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
                         placeholder="info@rajconstructions.com"
                         className={formControlClassName}
                       />
                     </FormField>
+                    <FormField id="s-flatno" label="Flat / Unit No">
+                      <input
+                        id="s-flatno"
+                        value={flatNo}
+                        onChange={(e) => setFlatNo(e.target.value)}
+                        placeholder="Flat / Suite number"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField id="s-city" label="City">
+                      <input
+                        id="s-city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="Bengaluru"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField id="s-country" label="Country">
+                      <input
+                        id="s-country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        placeholder="India"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField id="s-pin" label="PIN Code">
+                      <input
+                        id="s-pin"
+                        value={pinCode}
+                        onChange={(e) => setPinCode(e.target.value)}
+                        placeholder="560001"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField id="s-year" label="Company Founded Year">
+                      <input
+                        id="s-year"
+                        value={companyFoundedYear}
+                        onChange={(e) => setCompanyFoundedYear(e.target.value)}
+                        placeholder="2010"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField id="s-lat" label="Latitude">
+                      <input
+                        id="s-lat"
+                        value={latitude}
+                        onChange={(e) => setLatitude(e.target.value)}
+                        placeholder="12.9716"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField id="s-lng" label="Longitude">
+                      <input
+                        id="s-lng"
+                        value={longitude}
+                        onChange={(e) => setLongitude(e.target.value)}
+                        placeholder="77.5946"
+                        className={formControlClassName}
+                      />
+                    </FormField>
                   </div>
-                  <FormField id="s-tagline" label="Tagline">
-                    <input
-                      id="s-tagline"
-                      value={tagline}
-                      onChange={(e) => setTagline(e.target.value)}
-                      placeholder="Company tagline shown on homepage"
-                      className={formControlClassName}
-                    />
-                  </FormField>
-                  <FormField id="s-address" label="Office Address">
+                  <FormField id="s-address" label="Street Address">
                     <textarea
                       id="s-address"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      placeholder="Full office address"
+                      placeholder="Street address / building name"
                       className={`${textAreaControlClassName} resize-none`}
                       rows={2}
+                    />
+                  </FormField>
+                  <FormField id="s-summary" label="Company Summary">
+                    <textarea
+                      id="s-summary"
+                      value={companySummary}
+                      onChange={(e) => setCompanySummary(e.target.value)}
+                      placeholder="Brief description of the company..."
+                      className={`${textAreaControlClassName} resize-none`}
+                      rows={3}
                     />
                   </FormField>
                   <SaveBar isSaving={isSaving} saveMessage={saveMessage} />
@@ -244,13 +307,37 @@ function AdminSettings() {
               <Separator />
               <CardContent className="pt-6">
                 <form onSubmit={handleSaveAbout} className="space-y-5">
-                  <FormField id="s-years" label="Years of Experience">
-                    <input
-                      id="s-years"
-                      value={yearsExperience}
-                      onChange={(e) => setYearsExperience(e.target.value)}
-                      placeholder="15+ years of execution experience"
-                      className={formControlClassName}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <FormField id="s-founder" label="Founder Name">
+                      <input
+                        id="s-founder"
+                        value={founderName}
+                        onChange={(e) => setFounderName(e.target.value)}
+                        placeholder="Founder name"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                    <FormField
+                      id="s-degrees"
+                      label="Founder Degrees / Qualifications"
+                    >
+                      <input
+                        id="s-degrees"
+                        value={founderDegrees}
+                        onChange={(e) => setFounderDegrees(e.target.value)}
+                        placeholder="B.E (Civil), MBA"
+                        className={formControlClassName}
+                      />
+                    </FormField>
+                  </div>
+                  <FormField id="s-founder-bio" label="Founder Bio">
+                    <textarea
+                      id="s-founder-bio"
+                      value={founderSummary}
+                      onChange={(e) => setFounderSummary(e.target.value)}
+                      placeholder="Brief description of the founder..."
+                      className={`${textAreaControlClassName} resize-none`}
+                      rows={3}
                     />
                   </FormField>
                   <FormField id="s-mission" label="Mission Statement">
@@ -273,26 +360,16 @@ function AdminSettings() {
                       rows={3}
                     />
                   </FormField>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <FormField id="s-founder" label="Founder Name">
-                      <input
-                        id="s-founder"
-                        value={founderName}
-                        onChange={(e) => setFounderName(e.target.value)}
-                        placeholder="Founder name"
-                        className={formControlClassName}
-                      />
-                    </FormField>
-                    <FormField id="s-role" label="Founder Role">
-                      <input
-                        id="s-role"
-                        value={founderRole}
-                        onChange={(e) => setFounderRole(e.target.value)}
-                        placeholder="Founder & Managing Director"
-                        className={formControlClassName}
-                      />
-                    </FormField>
-                  </div>
+                  <FormField id="s-milestones" label="Key Milestones">
+                    <textarea
+                      id="s-milestones"
+                      value={keyMilestones}
+                      onChange={(e) => setKeyMilestones(e.target.value)}
+                      placeholder="Key milestones in company history..."
+                      className={`${textAreaControlClassName} resize-none`}
+                      rows={4}
+                    />
+                  </FormField>
                   <SaveBar isSaving={isSaving} saveMessage={saveMessage} />
                 </form>
               </CardContent>

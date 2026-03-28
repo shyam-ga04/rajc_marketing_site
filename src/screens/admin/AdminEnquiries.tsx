@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -129,14 +129,33 @@ function AdminEnquiries() {
   const [search, setSearch] = useState('')
   const [viewEnquiry, setViewEnquiry] = useState<Enquiry | null>(null)
 
-  const filtered = enquiries.filter(
-    (e) =>
-      e.name.toLowerCase().includes(search.toLowerCase()) ||
-      e.email.toLowerCase().includes(search.toLowerCase()) ||
-      e.location.toLowerCase().includes(search.toLowerCase()),
+  const filtered = useMemo(
+    () =>
+      enquiries.filter(
+        (e) =>
+          e.name.toLowerCase().includes(search.toLowerCase()) ||
+          e.email.toLowerCase().includes(search.toLowerCase()) ||
+          e.location.toLowerCase().includes(search.toLowerCase()),
+      ),
+    [enquiries, search],
   )
 
-  const byStatus = (status: Enquiry['status']) => filtered.filter((e) => e.status === status)
+  const newEnquiries = useMemo(() => filtered.filter((e) => e.status === 'new'), [filtered])
+  const inProgressEnquiries = useMemo(
+    () => filtered.filter((e) => e.status === 'in-progress'),
+    [filtered],
+  )
+  const resolvedEnquiries = useMemo(
+    () => filtered.filter((e) => e.status === 'resolved'),
+    [filtered],
+  )
+
+  const tabsConfig = [
+    { value: 'all', rows: filtered },
+    { value: 'new', rows: newEnquiries },
+    { value: 'in-progress', rows: inProgressEnquiries },
+    { value: 'resolved', rows: resolvedEnquiries },
+  ]
 
   function updateStatus(id: string, status: Enquiry['status']) {
     setEnquiries((prev) => prev.map((e) => (e.id === id ? { ...e, status } : e)))
@@ -174,25 +193,18 @@ function AdminEnquiries() {
                     All ({filtered.length})
                   </TabsTrigger>
                   <TabsTrigger value="new" className="text-xs">
-                    New ({byStatus('new').length})
+                    New ({newEnquiries.length})
                   </TabsTrigger>
                   <TabsTrigger value="in-progress" className="text-xs">
-                    In Progress ({byStatus('in-progress').length})
+                    In Progress ({inProgressEnquiries.length})
                   </TabsTrigger>
                   <TabsTrigger value="resolved" className="text-xs">
-                    Resolved ({byStatus('resolved').length})
+                    Resolved ({resolvedEnquiries.length})
                   </TabsTrigger>
                 </TabsList>
               </div>
 
-              {(
-                [
-                  { value: 'all', rows: filtered },
-                  { value: 'new', rows: byStatus('new') },
-                  { value: 'in-progress', rows: byStatus('in-progress') },
-                  { value: 'resolved', rows: byStatus('resolved') },
-                ] as const
-              ).map(({ value, rows }) => (
+              {tabsConfig.map(({ value, rows }) => (
                 <TabsContent key={value} value={value} className="mt-0">
                   <Table>
                     <TableHeader>
@@ -207,7 +219,7 @@ function AdminEnquiries() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {rows.map((enq) => (
+                      {rows.map((enq: Enquiry) => (
                         <TableRow key={enq.id}>
                           <TableCell className="font-medium">{enq.name}</TableCell>
                           <TableCell>
