@@ -13,6 +13,8 @@ import AdminProjects from "./screens/admin/AdminProjects"
 import AdminServices from "./screens/admin/AdminServices"
 import AdminEnquiries from "./screens/admin/AdminEnquiries"
 import AdminSettings from "./screens/admin/AdminSettings"
+import PrivacyPolicy from "./screens/PrivacyPolicy"
+import TermsOfService from "./screens/TermsOfService"
 
 const rootRoute = new RootRoute({
   component: App,
@@ -96,6 +98,18 @@ const adminSettingsRoute = new Route({
   component: AdminSettings,
 })
 
+const privacyPolicyRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/privacy-policy",
+  component: PrivacyPolicy,
+})
+
+const termsOfServiceRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/terms-of-service",
+  component: TermsOfService,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
@@ -110,6 +124,8 @@ const routeTree = rootRoute.addChildren([
   adminServicesRoute,
   adminEnquiriesRoute,
   adminSettingsRoute,
+  privacyPolicyRoute,
+  termsOfServiceRoute,
 ])
 
 export const router = new Router({ routeTree })
