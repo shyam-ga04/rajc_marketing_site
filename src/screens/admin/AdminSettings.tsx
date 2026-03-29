@@ -12,8 +12,9 @@ import {
   createCompanyDetails,
   updateCompanyDetails,
 } from "@/lib/api/admin"
-import { Save, Building2, BookOpen } from "lucide-react"
+import { Save, Building2, BookOpen, ImageIcon, Upload } from "lucide-react"
 import AdminLayout from "./AdminLayout"
+import { uploadCompanyLogo } from "@/lib/api/admin"
 
 const COMPANY_ID = 1
 
@@ -64,6 +65,13 @@ function AdminSettings() {
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
 
+  // Branding tab
+  const [logoUrl, setLogoUrl] = useState("")
+  const [selectedLogoFile, setSelectedLogoFile] = useState<File | null>(null)
+  const [logoPreview, setLogoPreview] = useState("")
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false)
+  const [logoMessage, setLogoMessage] = useState("")
+
   // About & Leadership tab
   const [founderName, setFounderName] = useState("")
   const [founderDegrees, setFounderDegrees] = useState("")
@@ -76,6 +84,7 @@ function AdminSettings() {
     getCompanyDetails(COMPANY_ID).then((res) => {
       if (!res?.data) return
       const d = res.data as Record<string, string>
+      console.log({ d })
       setRecordExists(true)
       if (d.contact_number) setContactNumber(d.contact_number)
       if (d.contact_email) setContactEmail(d.contact_email)
@@ -94,6 +103,7 @@ function AdminSettings() {
       if (d.mission) setMission(d.mission)
       if (d.vision) setVision(d.vision)
       if (d.key_milestones) setKeyMilestones(d.key_milestones)
+      if (d.logo) setLogoUrl(d.logo)
     })
   }, [])
 
@@ -159,6 +169,32 @@ function AdminSettings() {
     }
   }
 
+  function handleLogoFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setSelectedLogoFile(file)
+    setLogoPreview(URL.createObjectURL(file))
+  }
+
+  async function handleLogoUpload() {
+    if (!selectedLogoFile) return
+    setIsUploadingLogo(true)
+    setLogoMessage("")
+    try {
+      const res = await uploadCompanyLogo(selectedLogoFile, COMPANY_ID)
+      const url = res?.data?.logo ?? logoPreview
+      setLogoUrl(url)
+      setSelectedLogoFile(null)
+      setLogoPreview("")
+      setLogoMessage("Logo uploaded successfully.")
+    } catch {
+      setLogoMessage("Failed to upload logo. Please try again.")
+    } finally {
+      setIsUploadingLogo(false)
+      setTimeout(() => setLogoMessage(""), 3000)
+    }
+  }
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -173,6 +209,7 @@ function AdminSettings() {
           <TabsList>
             <TabsTrigger value="company">Company Info</TabsTrigger>
             <TabsTrigger value="about">About & Leadership</TabsTrigger>
+            <TabsTrigger value="branding">Branding</TabsTrigger>
           </TabsList>
 
           <TabsContent value="company">
@@ -372,6 +409,83 @@ function AdminSettings() {
                   </FormField>
                   <SaveBar isSaving={isSaving} saveMessage={saveMessage} />
                 </form>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="branding">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold flex items-center gap-2">
+                  <ImageIcon className="h-4 w-4 text-primary" />
+                  Brand Logo
+                </CardTitle>
+              </CardHeader>
+              <Separator />
+              <CardContent className="pt-6">
+                <div className="space-y-5">
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">Current Logo</p>
+                    {logoPreview || logoUrl ? (
+                      <div className="w-40 h-40 rounded-lg border border-input flex overflow-hidden bg-muted">
+                        <img
+                          src={logoPreview || logoUrl}
+                          alt="Brand logo"
+                          className="w-full h-full object-fill"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-40 h-40 rounded-lg border border-dashed border-input flex flex-col items-center justify-center gap-2 bg-muted text-muted-foreground">
+                        <ImageIcon className="h-8 w-8" />
+                        <span className="text-xs">No logo uploaded</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="logo-upload"
+                      className="text-sm font-medium"
+                    >
+                      Upload New Logo
+                    </label>
+                    <input
+                      id="logo-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoFileChange}
+                      className={formControlClassName + " pt-2 cursor-pointer"}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Accepted formats: PNG, JPG, SVG, WebP
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2">
+                    {logoMessage ? (
+                      <p
+                        className={`text-sm ${
+                          logoMessage.includes("Failed")
+                            ? "text-destructive"
+                            : "text-green-600"
+                        }`}
+                      >
+                        {logoMessage}
+                      </p>
+                    ) : (
+                      <span />
+                    )}
+                    <Button
+                      onClick={handleLogoUpload}
+                      size="sm"
+                      disabled={!selectedLogoFile || isUploadingLogo}
+                      className="gap-2"
+                    >
+                      <Upload className="h-4 w-4" />
+                      {isUploadingLogo ? "Uploading..." : "Upload Logo"}
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

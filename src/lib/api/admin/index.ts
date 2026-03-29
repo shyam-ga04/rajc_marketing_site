@@ -29,3 +29,14 @@ export const updateCompanyDetails = async (payload: any, id: number) => {
     return response
   } catch (error) {}
 }
+
+export const uploadCompanyLogo = async (file: File, id: number) => {
+  const formData = new FormData()
+  formData.append("logo", file)
+  const response = await axios.post(
+    `${apiEndPoint}/admin/company/upload-logo/${id}`,
+    formData,
+    { headers: { "Content-Type": "multipart/form-data" } },
+  )
+  return response
+}
