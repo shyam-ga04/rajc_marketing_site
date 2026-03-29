@@ -15,6 +15,7 @@ import {
 import { Save, Building2, BookOpen, ImageIcon, Upload } from "lucide-react"
 import AdminLayout from "./AdminLayout"
 import { uploadCompanyLogo } from "@/lib/api/admin"
+import LocationPicker from "@/lib/components/LocationPicker"
 
 const COMPANY_ID = 1
 
@@ -288,24 +289,17 @@ function AdminSettings() {
                         className={formControlClassName}
                       />
                     </FormField>
-                    <FormField id="s-lat" label="Latitude">
-                      <input
-                        id="s-lat"
-                        value={latitude}
-                        onChange={(e) => setLatitude(e.target.value)}
-                        placeholder="12.9716"
-                        className={formControlClassName}
-                      />
-                    </FormField>
-                    <FormField id="s-lng" label="Longitude">
-                      <input
-                        id="s-lng"
-                        value={longitude}
-                        onChange={(e) => setLongitude(e.target.value)}
-                        placeholder="77.5946"
-                        className={formControlClassName}
-                      />
-                    </FormField>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">Office Location</p>
+                    <LocationPicker
+                      lat={latitude ? parseFloat(latitude) : null}
+                      lng={longitude ? parseFloat(longitude) : null}
+                      onChange={(lat, lng) => {
+                        setLatitude(String(lat))
+                        setLongitude(String(lng))
+                      }}
+                    />
                   </div>
                   <FormField id="s-address" label="Street Address">
                     <textarea
