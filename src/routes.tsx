@@ -8,6 +8,13 @@ import Projects from "./screens/Projects"
 import ProjectDetails from "./screens/ProjectDetails"
 import ContactUs from "./screens/ContactUs"
 import AdminLogin from "./screens/AdminLogin"
+import AdminOverview from "./screens/admin/AdminOverview"
+import AdminProjects from "./screens/admin/AdminProjects"
+import AdminServices from "./screens/admin/AdminServices"
+import AdminEnquiries from "./screens/admin/AdminEnquiries"
+import AdminSettings from "./screens/admin/AdminSettings"
+import PrivacyPolicy from "./screens/PrivacyPolicy"
+import TermsOfService from "./screens/TermsOfService"
 
 const rootRoute = new RootRoute({
   component: App,
@@ -61,6 +68,48 @@ const adminRoute = new Route({
   component: AdminLogin,
 })
 
+const adminDashboardRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/admin/dashboard",
+  component: AdminOverview,
+})
+
+const adminProjectsRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/admin/dashboard/projects",
+  component: AdminProjects,
+})
+
+const adminServicesRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/admin/dashboard/services",
+  component: AdminServices,
+})
+
+const adminEnquiriesRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/admin/dashboard/enquiries",
+  component: AdminEnquiries,
+})
+
+const adminSettingsRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/admin/dashboard/settings",
+  component: AdminSettings,
+})
+
+const privacyPolicyRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/privacy-policy",
+  component: PrivacyPolicy,
+})
+
+const termsOfServiceRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/terms-of-service",
+  component: TermsOfService,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
@@ -70,6 +119,13 @@ const routeTree = rootRoute.addChildren([
   projectDetailByIdRoute,
   contactUsRoute,
   adminRoute,
+  adminDashboardRoute,
+  adminProjectsRoute,
+  adminServicesRoute,
+  adminEnquiriesRoute,
+  adminSettingsRoute,
+  privacyPolicyRoute,
+  termsOfServiceRoute,
 ])
 
 export const router = new Router({ routeTree })

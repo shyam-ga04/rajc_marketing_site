@@ -34,6 +34,20 @@ function Footer() {
           </div>
           <div className="md:text-right">
             <p className="text-sm text-muted-foreground">{footer.copyright}</p>
+            <div className="mt-2 flex gap-3 md:justify-end">
+              <a
+                href="/privacy-policy"
+                className="text-xs text-muted-foreground hover:text-primary hover:underline"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/terms-of-service"
+                className="text-xs text-muted-foreground hover:text-primary hover:underline"
+              >
+                Terms of Service
+              </a>
+            </div>
           </div>
         </div>
       </div>

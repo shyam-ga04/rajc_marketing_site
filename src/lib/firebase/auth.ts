@@ -1,4 +1,4 @@
-import { firebaseConfig, isFirebaseConfigReady } from "@/lib/firebase/config"
+import { firebaseConfig } from "./config"
 
 interface FirebaseSignInResponse {
   localId: string
@@ -30,12 +30,6 @@ function mapFirebaseError(errorCode?: string) {
 }
 
 export async function signInWithEmailPassword(email: string, password: string) {
-  if (!isFirebaseConfigReady()) {
-    throw new Error(
-      "Firebase is not configured. Update src/lib/firebase/config.ts with valid project values."
-    )
-  }
-
   const response = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}`,
     {
@@ -46,7 +40,7 @@ export async function signInWithEmailPassword(email: string, password: string) {
         password,
         returnSecureToken: true,
       }),
-    }
+    },
   )
 
   if (!response.ok) {
